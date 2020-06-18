@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.2.0",
     "eslint-plugin-react": "^7.20.0",
     "prop-types": "15.7.2",
@@ -30,6 +32,20 @@
     "test": "npm run eslint && jest",
     "build": "webpack --mode production",
     "start": "webpack-dev-server"
+  },
+  "jest": {
+    "setupFiles": [
+      "./src/setupTests.js"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
   },
   "repository": {
     "type": "git",
