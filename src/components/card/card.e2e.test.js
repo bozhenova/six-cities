@@ -1,26 +1,28 @@
 import React from 'react';
 import Card from './card';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
+
+const mock = {
+  offerDetails: {
+    title: '',
+    previewPhoto: '',
+    isPremium: true,
+    isFavorite: false,
+    price: 136,
+    type: '',
+    rating: 88
+  },
+  onCardHover: jest.fn()
+};
 
 it('should dispatch a mouseenter function', () => {
-  const props = {
-    offerDetails: {
-      title: '',
-      previewPhoto: '',
-      isPremium: true,
-      isFavorite: false,
-      price: 136,
-      type: '',
-      rating: 88
-    },
-    onCardHover: jest.fn()
-  };
+  const { offerDetails, onCardHover } = mock;
 
   const wrapper = shallow(
-    <Card offerDetails={props.offerDetails} onCardHover={props.onCardHover} />
+    <Card offerDetails={offerDetails} onCardHover={onCardHover} />
   );
 
   expect(wrapper.find('.place-card').exists()).toBeTruthy();
   wrapper.find('.place-card').simulate('mouseenter');
-  expect(props.onCardHover).toBeCalled();
+  expect(onCardHover).toBeCalled();
 });
