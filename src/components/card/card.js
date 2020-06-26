@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import FavouriteButton from '../favourite-button/favourite-button';
 
 class Card extends Component {
   static propTypes = {
@@ -12,13 +14,16 @@ class Card extends Component {
       type: PropTypes.string.isRequired,
       rating: PropTypes.number.isRequired
     }),
-    onCardHover: PropTypes.func.isRequired
+    onCardHover: PropTypes.func,
+    classModPrefix: PropTypes.string.isRequired,
+    mainClassMod: PropTypes.string.isRequired
   };
 
   render() {
     const {
       offerDetails: {
         title,
+        id,
         previewPhoto,
         isPremium,
         isFavorite,
@@ -26,63 +31,54 @@ class Card extends Component {
         type,
         rating
       },
+      mainClassMod = ``,
+      classModPrefix = ``,
       onCardHover
     } = this.props;
 
-    const premium = isPremium && (
-      <div className='place-card__mark'>
-        <span>Premium</span>
-      </div>
-    );
-
-    const favorite = isFavorite
-      ? `place-card__bookmark-button button place-card__bookmark-button--active`
-      : `place-card__bookmark-button button`;
-
     return (
       <article
-        className='cities__place-card place-card'
+        className={`${mainClassMod} place-card`}
         onMouseEnter={onCardHover}
       >
-        {premium}
-        <div className='cities__image-wrapper place-card__image-wrapper'>
-          <a href='#'>
+        {isPremium ? (
+          <div className='place-card__mark'>
+            <span>Premium</span>
+          </div>
+        ) : null}
+        <div
+          className={`${classModPrefix}__image-wrapper place-card__image-wrapper`}
+        >
+          <button type='button'>
             <img
               className='place-card__image'
               src={previewPhoto}
               width='260'
               height='200'
-              alt='Place image'
+              alt={title}
             />
-          </a>
+          </button>
         </div>
-        <div className='place-card__info'>
+        <div className={`${classModPrefix}__card-info place-card__info`}>
           <div className='place-card__price-wrapper'>
             <div className='place-card__price'>
               <b className='place-card__price-value'>&euro;{price}</b>
               <span className='place-card__price-text'>&#47;&nbsp;night</span>
             </div>
-            <button className={favorite} type='button'>
-              <svg className='place-card__bookmark-icon' width='18' height='19'>
-                <use xlinkHref='#icon-bookmark' />
-              </svg>
-              <span className='visually-hidden'>To bookmarks</span>
-            </button>
+            <FavouriteButton
+              id={id}
+              isFavorite={isFavorite}
+              prefixClass={`place-card`}
+            />
           </div>
           <div className='place-card__rating rating'>
             <div className='place-card__stars rating__stars'>
-              <span
-                style={{
-                  width: `${rating}%`
-                }}
-              />
+              <span style={{ width: `${rating}%` }} />
               <span className='visually-hidden'>Rating</span>
             </div>
           </div>
           <h2 className='place-card__name'>
-            <a className='title' href='#'>
-              {title}
-            </a>
+            <Link to={`/offer/${id}`}>{title}</Link>
           </h2>
           <p className='place-card__type'>{type}</p>
         </div>
