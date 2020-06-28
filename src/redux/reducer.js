@@ -9,9 +9,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.CHANGE_CITY:
-      return { ...state, city: action.payload.city };
-    case types.FETCH_OFFERS:
-      return { ...state, offers: action.payload.offers };
+      return { ...state, city: action.payload };
   }
   return state;
 };

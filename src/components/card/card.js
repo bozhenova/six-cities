@@ -7,6 +7,7 @@ class Card extends Component {
   static propTypes = {
     offerDetails: PropTypes.shape({
       title: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
       previewPhoto: PropTypes.string.isRequired,
       isPremium: PropTypes.bool.isRequired,
       isFavorite: PropTypes.bool.isRequired,
@@ -14,7 +15,6 @@ class Card extends Component {
       type: PropTypes.string.isRequired,
       rating: PropTypes.number.isRequired
     }),
-    onCardHover: PropTypes.func,
     classModPrefix: PropTypes.string.isRequired,
     mainClassMod: PropTypes.string.isRequired
   };
@@ -32,15 +32,11 @@ class Card extends Component {
         rating
       },
       mainClassMod = ``,
-      classModPrefix = ``,
-      onCardHover
+      classModPrefix = ``
     } = this.props;
 
     return (
-      <article
-        className={`${mainClassMod} place-card`}
-        onMouseEnter={onCardHover}
-      >
+      <article className={`${mainClassMod} place-card`}>
         {isPremium ? (
           <div className='place-card__mark'>
             <span>Premium</span>

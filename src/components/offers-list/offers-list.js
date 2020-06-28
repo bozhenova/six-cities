@@ -1,25 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import Card from '../card/card';
-const shortid = require('shortid');
 
-const OffersList = ({ offers, handleCardHover }) => {
-  const places = offers.map(offer => {
+class OffersList extends Component {
+  static defaultProps = {
+    classModOffers: []
+  };
+
+  static propTypes = {
+    offers: PropTypes.arrayOf(PropTypes.object),
+    classModOffers: PropTypes.array
+  };
+  state = {
+    current: null
+  };
+
+  onSelectOffer = id => {
+    this.setState({ current: id });
+  };
+
+  render() {
+    const places = this.props.offers.map(offer => {
+      return (
+        <Card
+          key={offer.id}
+          offerDetails={offer}
+          selected={this.state.current === offer.id}
+          onSelected={this.onSelectOffer}
+          classModPrefix={`cities`}
+          mainClassMod={`cities__place-card`}
+        />
+      );
+    });
     return (
-      <li key={shortid.generate()}>
-        <Card offerDetails={offer} onCardHover={handleCardHover} />
-      </li>
+      <div className={`${this.props.classModOffers.join(` `)} places__list `}>
+        {places}
+      </div>
     );
-  });
+  }
+}
 
-  return (
-    <ul className='cities__places-list places__list tabs__content'>{places}</ul>
-  );
+const mapStateToProps = state => {
+  return {
+    offers: state.offers.filter(offer => {
+      return offer.city === state.city;
+    })
+  };
 };
 
-OffersList.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object),
-  handleCardHover: PropTypes.func.isRequired
-};
-
-export default OffersList;
+export default connect(mapStateToProps)(OffersList);
