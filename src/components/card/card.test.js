@@ -5,6 +5,7 @@ import renderer from 'react-test-renderer';
 describe('Card', () => {
   const props = {
     offerDetails: {
+      id: 33,
       title: '',
       previewPhoto: '',
       isPremium: true,

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Card from '../card/card';
+import { ActionCreators } from '../../redux/actions';
 
 class OffersList extends Component {
   static defaultProps = {
@@ -11,14 +12,12 @@ class OffersList extends Component {
 
   static propTypes = {
     offers: PropTypes.arrayOf(PropTypes.object),
+    setCurrentOffer: PropTypes.func.isRequired,
     classModOffers: PropTypes.array
   };
-  state = {
-    current: null
-  };
 
-  onSelectOffer = id => {
-    this.setState({ current: id });
+  onOfferSelect = id => {
+    this.props.setCurrentOffer(id);
   };
 
   render() {
@@ -27,8 +26,7 @@ class OffersList extends Component {
         <Card
           key={offer.id}
           offerDetails={offer}
-          selected={this.state.current === offer.id}
-          onSelected={this.onSelectOffer}
+          selectOffer={this.onOfferSelect}
           classModPrefix={`cities`}
           mainClassMod={`cities__place-card`}
         />
@@ -42,12 +40,8 @@ class OffersList extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    offers: state.offers.filter(offer => {
-      return offer.city === state.city;
-    })
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  setCurrentOffer: id => dispatch(ActionCreators.setCurrentOffer(id))
+});
 
-export default connect(mapStateToProps)(OffersList);
+export default connect(null, mapDispatchToProps)(OffersList);

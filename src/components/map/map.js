@@ -6,9 +6,9 @@ import leaflet from 'leaflet';
 const MapConfig = {
   ID: `map`,
   ZOOM: 12,
-  PIN_PATH: `img/pin.svg`,
-  ACTIVE_PIN_PATH: `img/pin-active.svg`,
-  PIN_SIZE: [30, 30],
+  MARKER_PATH: `img/pin.svg`,
+  ACTIVE_MARKER_PATH: `img/pin-active.svg`,
+  MARKER_SIZE: [30, 30],
   TITLE_LAYER: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`
 };
 
@@ -25,28 +25,23 @@ class Map extends Component {
 
   group = null;
   icon = leaflet.icon({
-    iconUrl: MapConfig.PIN_PATH,
-    iconSize: MapConfig.PIN_SIZE
+    iconUrl: MapConfig.MARKER_PATH,
+    iconSize: MapConfig.MARKER_SIZE
   });
-
   activeIcon = leaflet.icon({
-    iconUrl: MapConfig.ACTIVE_PIN_PATH,
-    iconSize: MapConfig.PIN_SIZE
+    iconUrl: MapConfig.ACTIVE_MARKER_PATH,
+    iconSize: MapConfig.MARKER_SIZE
   });
 
   addMarkers() {
     const { selectedOffer, coordinates } = this.props;
-    const activeOffer = selectedOffer.length !== 0;
+
     this.group = leaflet.layerGroup().addTo(this.map);
 
     for (let item of coordinates) {
       leaflet.marker(item, { icon: this.icon }).addTo(this.group);
     }
-    if (activeOffer) {
-      leaflet
-        .marker(selectedOffer, { icon: this.activeIcon })
-        .addTo(this.group);
-    }
+    leaflet.marker(selectedOffer, { icon: this.activeIcon }).addTo(this.group);
   }
 
   initMap() {
@@ -78,11 +73,8 @@ class Map extends Component {
     for (let item of coordinates) {
       leaflet.marker(item, { icon: this.icon }).addTo(this.group);
     }
-    if (activeOffer) {
-      leaflet
-        .marker(selectedOffer, { icon: this.activeIcon })
-        .addTo(this.group);
-    }
+
+    leaflet.marker(selectedOffer, { icon: this.activeIcon }).addTo(this.group);
   }
 
   render() {
