@@ -7,7 +7,6 @@ import Map from '../map/map';
 import OffersList from '../offers-list/offers-list';
 import CitiesList from '../cities-list/cities-list';
 import Select from '../select/select';
-import getSortedOffers from '../../redux/selectors/get-sorted-offers';
 import { ActionCreators } from '../../redux/actions';
 
 class Main extends Component {
@@ -18,21 +17,12 @@ class Main extends Component {
     setSortType: PropTypes.func.isRequired
   };
 
-  getCurrentOffer = () => {
-    const { currentOfferId, offers } = this.props;
-    const currentOffer = offers.find(item => item.id === currentOfferId);
-    return currentOffer
-      ? [currentOffer.coordinates[0], currentOffer.coordinates[1]]
-      : [0, 0];
-  };
-
   onSelectChange = e => {
     this.props.setSortType(e.target.value);
   };
 
   render() {
     const { currentCity, offers } = this.props;
-    const citiesCoordinates = offers.map(offer => offer.coordinates);
 
     return (
       <div className='page page--gray page--main'>
@@ -60,11 +50,7 @@ class Main extends Component {
                 </section>
                 <div className='cities__right-section'>
                   <section className='cities__map map'>
-                    <Map
-                      coordinates={citiesCoordinates}
-                      currentCity={currentCity}
-                      selectedOffer={this.getCurrentOffer()}
-                    />
+                    <Map />
                   </section>
                 </div>
               </div>
@@ -77,9 +63,9 @@ class Main extends Component {
 }
 
 const mapStateToProps = state => ({
-  currentCity: state.city,
+  currentCity: state.currentCity,
   currentOfferId: state.currentOfferId,
-  offers: getSortedOffers(state)
+  offers: state.filteredOffers
 });
 
 const mapDispatchToProps = dispatch => ({

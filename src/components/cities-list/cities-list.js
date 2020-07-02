@@ -38,8 +38,8 @@ CitiesList.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    cities: [...new Set([...state.offers.map(offer => offer.city)])],
-    currentCity: state.city
+    cities: state.cities,
+    currentCity: state.currentCity
   };
 };
 
@@ -47,4 +47,5 @@ const mapDispatchToProps = dispatch => ({
   changeCurrentCity: city => dispatch(ActionCreators.setCity(city))
 });
 
+export { CitiesList };
 export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);

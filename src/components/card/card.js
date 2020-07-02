@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import FavouriteButton from '../favourite-button/favourite-button';
+import FavoriteButton from '../favorite-button/favorite-button';
 
 const Card = ({
   offerDetails: {
@@ -50,7 +50,7 @@ const Card = ({
             <b className='place-card__price-value'>&euro;{price}</b>
             <span className='place-card__price-text'>&#47;&nbsp;night</span>
           </div>
-          <FavouriteButton
+          <FavoriteButton
             id={id}
             isFavorite={isFavorite}
             prefixClass={`place-card`}

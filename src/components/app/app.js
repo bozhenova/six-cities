@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Main from '../main/main';
 import OfferDetails from '../offer-details/offer-details';

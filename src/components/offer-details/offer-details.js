@@ -199,7 +199,7 @@ class OfferDetails extends Component {
               </div>
             </div>
             <section className='property__map map'>
-              <Map coordinates={citiesCoordinates} currentCity={currentCity} />
+              <Map />
             </section>
           </section>
           <div className='container'>

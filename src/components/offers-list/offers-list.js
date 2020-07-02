@@ -44,4 +44,5 @@ const mapDispatchToProps = dispatch => ({
   setCurrentOffer: id => dispatch(ActionCreators.setCurrentOffer(id))
 });
 
+export { OffersList };
 export default connect(null, mapDispatchToProps)(OffersList);
