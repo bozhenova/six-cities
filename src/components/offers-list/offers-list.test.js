@@ -1,10 +1,12 @@
 import React from 'react';
-import OffersList from './offers-list';
+import { OffersList } from './offers-list';
 import renderer from 'react-test-renderer';
+import { HashRouter as Router } from 'react-router-dom';
 
 describe('Offers List', () => {
   const props = {
-    handleCardHover: () => {},
+    classModOffers: [`cities__places-list`, `tabs__content`],
+    setCurrentOffer: jest.fn(),
     offers: [
       {
         id: 42334224,
@@ -34,7 +36,13 @@ describe('Offers List', () => {
   };
 
   it('should render a list of offers', () => {
-    const tree = renderer.create(<OffersList {...props} />).toJSON();
+    const tree = renderer
+      .create(
+        <Router>
+          <OffersList {...props} />
+        </Router>
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

@@ -7,7 +7,6 @@ exports[`Map should render a map 1`] = `
   style={
     Object {
       "height": "100%",
-      "minHeight": "823px",
       "width": "100%",
     }
   }

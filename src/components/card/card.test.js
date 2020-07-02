@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from './card';
 import renderer from 'react-test-renderer';
+import { HashRouter as Router } from 'react-router-dom';
 
 describe('Card', () => {
   const props = {
@@ -14,11 +15,19 @@ describe('Card', () => {
       type: '',
       rating: 88
     },
-    onCardHover: () => {}
+    selectOffer: jest.fn(),
+    classModPrefix: `cities`,
+    mainClassMod: `cities__place-card`
   };
 
   it('should render a card', () => {
-    const tree = renderer.create(<Card {...props} />).toJSON();
+    const tree = renderer
+      .create(
+        <Router>
+          <Card {...props} />
+        </Router>
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

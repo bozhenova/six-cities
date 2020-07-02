@@ -3,7 +3,6 @@
 exports[`Card should render a card 1`] = `
 <article
   className="cities__place-card place-card"
-  onMouseEnter={[Function]}
 >
   <div
     className="place-card__mark"
@@ -14,21 +13,22 @@ exports[`Card should render a card 1`] = `
   </div>
   <div
     className="cities__image-wrapper place-card__image-wrapper"
+    onMouseEnter={[Function]}
   >
-    <a
-      href="#"
+    <button
+      type="button"
     >
       <img
-        alt="Place image"
+        alt=""
         className="place-card__image"
         height="200"
         src=""
         width="260"
       />
-    </a>
+    </button>
   </div>
   <div
-    className="place-card__info"
+    className="cities__card-info place-card__info"
   >
     <div
       className="place-card__price-wrapper"
@@ -49,13 +49,15 @@ exports[`Card should render a card 1`] = `
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button"
+        aria-pressed="false"
+        className="place-card__bookmark-button  button"
         type="button"
       >
         <svg
+          aria-hidden="true"
           className="place-card__bookmark-icon"
-          height="19"
-          width="18"
+          height={19}
+          width={18}
         >
           <use
             xlinkHref="#icon-bookmark"
@@ -64,7 +66,8 @@ exports[`Card should render a card 1`] = `
         <span
           className="visually-hidden"
         >
-          To bookmarks
+          To
+           bookmarks
         </span>
       </button>
     </div>
@@ -92,8 +95,8 @@ exports[`Card should render a card 1`] = `
       className="place-card__name"
     >
       <a
-        className="title"
-        href="#"
+        href="#/offer/33"
+        onClick={[Function]}
       >
         
       </a>

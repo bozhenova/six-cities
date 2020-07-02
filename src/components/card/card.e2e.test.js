@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from './card';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { HashRouter as Router } from 'react-router-dom';
 
 const mock = {
   offerDetails: {
@@ -10,19 +11,28 @@ const mock = {
     isFavorite: false,
     price: 136,
     type: '',
+    id: 42,
     rating: 88
   },
-  onCardHover: jest.fn()
+  selectOffer: jest.fn()
 };
+describe('Card component works correctly', () => {
+  it('should dispatch a mouseenter function', () => {
+    const { offerDetails, selectOffer } = mock;
 
-it('should dispatch a mouseenter function', () => {
-  const { offerDetails, onCardHover } = mock;
-
-  const wrapper = shallow(
-    <Card offerDetails={offerDetails} onCardHover={onCardHover} />
-  );
-
-  expect(wrapper.find('.place-card').exists()).toBeTruthy();
-  wrapper.find('.place-card').simulate('mouseenter');
-  expect(onCardHover).toBeCalled();
+    const wrapper = mount(
+      <Router>
+        <Card
+          offerDetails={offerDetails}
+          classModPrefix={`cities`}
+          mainClassMod={`cities__place-card`}
+          key={offerDetails.id}
+          selectOffer={selectOffer}
+        />
+      </Router>
+    );
+    expect(wrapper.find('.place-card__image-wrapper').exists()).toBeTruthy();
+    wrapper.find('.place-card__image-wrapper').simulate('mouseenter');
+    expect(selectOffer).toBeCalled();
+  });
 });

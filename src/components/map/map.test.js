@@ -1,5 +1,5 @@
 import React from 'react';
-import Map from './map';
+import { Map } from './map';
 import renderer from 'react-test-renderer';
 
 const createMapBlock = () => {
@@ -8,12 +8,25 @@ const createMapBlock = () => {
   global.document.body.appendChild(div);
 };
 
+const offers = [
+  {
+    city: {
+      coords: [52.369553943508, 4.85309666406198],
+      zoom: 12,
+      name: 'Amsterdam'
+    },
+    place: {
+      coords: [52.369553943508, 4.85309666406198],
+      zoom: 12
+    }
+  }
+];
+
 describe('Map', () => {
   it('should render a map', () => {
     createMapBlock();
-    const coordinates = [[52.3809553943508, 4.939309666406198]];
     const map = renderer
-      .create(<Map currentCity={`Amsterdam`} coordinates={coordinates} />)
+      .create(<Map offers={offers} currentOfferId={42} />)
       .toJSON();
     expect(map).toMatchSnapshot();
   });
