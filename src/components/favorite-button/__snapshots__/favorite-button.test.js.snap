@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Favorite Button should render a favorite button 1`] = `
+<button
+  aria-pressed="false"
+  className="undefined__bookmark-button  button"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    className="place-card__bookmark-icon"
+    height={19}
+    width={18}
+  >
+    <use
+      xlinkHref="#icon-bookmark"
+    />
+  </svg>
+  <span
+    className="visually-hidden"
+  >
+    To
+     bookmarks
+  </span>
+</button>
+`;
