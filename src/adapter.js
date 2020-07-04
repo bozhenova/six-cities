@@ -1,4 +1,4 @@
-const adaptOffers = offers =>
+export const adaptOffers = offers =>
   offers.map(offer => {
     return {
       bedrooms: offer[`bedrooms`],
@@ -35,4 +35,24 @@ const adaptOffers = offers =>
     };
   });
 
-export default adaptOffers;
+export const adaptComments = comments =>
+  comments.map(comment => ({
+    comment: comment[`comment`],
+    date: comment[`date`],
+    id: comment[`id`],
+    rating: comment[`rating`],
+    user: {
+      avatarUrl: comment[`user`][`avatar_url`],
+      id: comment[`user`][`id`],
+      isPro: comment[`user`][`is_pro`],
+      name: comment[`user`][`name`]
+    }
+  }));
+
+export const adaptLoginResponse = userData => ({
+  avatarUrl: userData[`avatar_url`],
+  email: userData[`email`],
+  id: userData[`id`],
+  isPro: userData[`is_pro`],
+  name: userData[`name`]
+});
