@@ -16,5 +16,25 @@ export const ActionCreators = {
   loadOffers: offers => ({
     type: types.LOAD_OFFERS,
     payload: offers
+  }),
+  loadNearbyOffers: offers => ({
+    type: types.LOAD_NEARBY_OFFERS,
+    payload: offers
+  }),
+  loadReviews: reviews => ({
+    type: types.LOAD_REVIEWS,
+    payload: reviews
+  }),
+  setUserData: user => ({
+    type: types.SET_USER_DATA,
+    payload: user
+  }),
+  requiredAuthorization: status => ({
+    type: types.SET_AUTHORIZATION_REQUIRED,
+    payload: status
+  }),
+  setError: error => ({
+    type: types.SET_ERROR,
+    payload: error
   })
 };
