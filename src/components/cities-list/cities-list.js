@@ -38,8 +38,8 @@ CitiesList.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    cities: state.cities,
-    currentCity: state.currentCity
+    cities: state.data.cities,
+    currentCity: state.data.currentCity
   };
 };
 

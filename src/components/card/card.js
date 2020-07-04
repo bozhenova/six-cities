@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import FavoriteButton from '../favorite-button/favorite-button';
+import { Constants } from '../../constants';
 
 const Card = ({
   offerDetails: {
@@ -18,13 +19,15 @@ const Card = ({
   classModPrefix = ``,
   selectOffer
 }) => {
-  const onOfferHover = e => {
-    e.preventDefault();
+  const onOfferHover = () => {
     selectOffer(id);
   };
 
   return (
-    <article className={`${mainClassMod} place-card`}>
+    <article
+      className={`${mainClassMod} place-card`}
+      onMouseEnter={onOfferHover}
+    >
       {isPremium ? (
         <div className='place-card__mark'>
           <span>Premium</span>
@@ -32,7 +35,6 @@ const Card = ({
       ) : null}
       <div
         className={`${classModPrefix}__image-wrapper place-card__image-wrapper`}
-        onMouseEnter={onOfferHover}
       >
         <button type='button'>
           <img
@@ -53,14 +55,14 @@ const Card = ({
           <FavoriteButton
             id={id}
             isFavorite={isFavorite}
-            prefixClass={`place-card`}
+            prefixClass={'place-card'}
           />
         </div>
         <div className='place-card__rating rating'>
           <div className='place-card__stars rating__stars'>
             <span
               style={{
-                width: `${rating}%`
+                width: `${(rating * 100) / Constants.MAX_RATING}%`
               }}
             />
             <span className='visually-hidden'>Rating</span>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Operations from '../../redux/operations';
 
 import Card from '../card/card';
 import { ActionCreators } from '../../redux/actions';
@@ -13,27 +14,32 @@ class OffersList extends Component {
   static propTypes = {
     offers: PropTypes.arrayOf(PropTypes.object),
     setCurrentOffer: PropTypes.func.isRequired,
-    classModOffers: PropTypes.array
+    classModOffers: PropTypes.array,
+    classModPrefix: PropTypes.string.isRequired,
+    mainClassMod: PropTypes.string.isRequired
   };
 
   onOfferSelect = id => {
-    this.props.setCurrentOffer(id);
+    if (this.props.offers.length > 3) {
+      this.props.setCurrentOffer(id);
+    }
   };
 
   render() {
-    const places = this.props.offers.map(offer => {
+    const { classModPrefix, offers, mainClassMod, classModOffers } = this.props;
+    const places = offers.map(offer => {
       return (
         <Card
           key={offer.id}
           offerDetails={offer}
           selectOffer={this.onOfferSelect}
-          classModPrefix={`cities`}
-          mainClassMod={`cities__place-card`}
+          classModPrefix={classModPrefix}
+          mainClassMod={mainClassMod}
         />
       );
     });
     return (
-      <div className={`${this.props.classModOffers.join(` `)} places__list `}>
+      <div className={`${classModOffers.join(` `)} places__list `}>
         {places}
       </div>
     );

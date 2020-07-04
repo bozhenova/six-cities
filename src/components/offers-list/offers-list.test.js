@@ -6,6 +6,8 @@ import { HashRouter as Router } from 'react-router-dom';
 describe('Offers List', () => {
   const props = {
     classModOffers: [`cities__places-list`, `tabs__content`],
+    classModPrefix: `cities`,
+    mainClassMod: `cities__place-card`,
     setCurrentOffer: jest.fn(),
     offers: [
       {

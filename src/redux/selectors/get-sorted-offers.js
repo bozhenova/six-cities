@@ -1,6 +1,6 @@
-const getSortedOffers = state => {
-  const offers = state.offers.filter(offer => offer.city === state.city);
-  switch (state.sortType) {
+const getSortedOffers = (allOffers, city, sortType) => {
+  const offers = allOffers.filter(offer => offer.city.name === city);
+  switch (sortType) {
     case `popular`:
       return sortByPopular(offers);
     case `to-high`:

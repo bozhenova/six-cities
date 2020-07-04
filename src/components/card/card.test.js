@@ -2,6 +2,7 @@ import React from 'react';
 import Card from './card';
 import renderer from 'react-test-renderer';
 import { HashRouter as Router } from 'react-router-dom';
+import Constants from '../../constants';
 
 describe('Card', () => {
   const props = {

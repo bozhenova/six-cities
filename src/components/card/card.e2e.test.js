@@ -2,6 +2,7 @@ import React from 'react';
 import Card from './card';
 import { mount } from 'enzyme';
 import { HashRouter as Router } from 'react-router-dom';
+import { Constants } from '../../constants';
 
 const mock = {
   offerDetails: {
