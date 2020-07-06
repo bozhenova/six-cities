@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -6,7 +6,7 @@ import { ActionCreators } from '../../redux/actions';
 import City from '../city/city';
 const shortid = require('shortid');
 
-class CitiesList extends Component {
+class CitiesList extends PureComponent {
   changeCity = city => {
     this.props.changeCurrentCity(city);
   };

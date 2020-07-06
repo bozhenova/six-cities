@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Operations from '../../redux/operations';
@@ -6,7 +6,7 @@ import Operations from '../../redux/operations';
 import Card from '../card/card';
 import { ActionCreators } from '../../redux/actions';
 
-class OffersList extends Component {
+class OffersList extends PureComponent {
   static defaultProps = {
     classModOffers: []
   };
@@ -16,11 +16,12 @@ class OffersList extends Component {
     setCurrentOffer: PropTypes.func.isRequired,
     classModOffers: PropTypes.array,
     classModPrefix: PropTypes.string.isRequired,
-    mainClassMod: PropTypes.string.isRequired
+    mainClassMod: PropTypes.string.isRequired,
+    match: PropTypes.object.isRequired
   };
 
   onOfferSelect = id => {
-    if (this.props.offers.length > 3) {
+    if (!Object.keys(this.props.match.params).length) {
       this.props.setCurrentOffer(id);
     }
   };

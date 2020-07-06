@@ -37,13 +37,15 @@ const Card = ({
         className={`${classModPrefix}__image-wrapper place-card__image-wrapper`}
       >
         <button type='button'>
-          <img
-            className='place-card__image'
-            src={previewPhoto}
-            width='260'
-            height='200'
-            alt={title}
-          />
+          <Link to={`/offer/${id}`}>
+            <img
+              className='place-card__image'
+              src={previewPhoto}
+              width='260'
+              height='200'
+              alt={title}
+            />
+          </Link>
         </button>
       </div>
       <div className={`${classModPrefix}__card-info place-card__info`}>

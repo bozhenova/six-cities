@@ -2,16 +2,15 @@ import axios from 'axios';
 
 import { ActionCreators } from './redux/actions';
 import { Constants } from './constants';
-import adaptOffers from './adapter';
 
-const configureApi = dispatch => {
+const configureAPI = dispatch => {
   const api = axios.create({
     baseURL: Constants.BASE_URL,
     timeout: Constants.TIMEOUT,
     withCredentials: true
   });
 
-  const onSuccess = response => adaptOffers(response.data);
+  const onSuccess = response => response.data;
   const onFail = err => {
     if (err.response.status === Constants.ACCESS_DENIED) {
       dispatch(ActionCreators);
@@ -24,4 +23,4 @@ const configureApi = dispatch => {
   return api;
 };
 
-export { configureApi };
+export default configureAPI;
