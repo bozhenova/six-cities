@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Review from '../review/review';
-const shortid = require('shortid');
 
-const ReviewsList = props => {
-  const reviews = offers.map(offer => {
+const ReviewsList = ({ reviews }) => {
+  const reviewsList = reviews.map(review => {
     return (
-      <li className='reviews__item' key={shortid.generate()}>
-        <Review />
+      <li className='reviews__item' key={review.id}>
+        <Review review={review} />
       </li>
     );
   });
 
-  return <ul class='reviews__list'>{reviews}</ul>;
+  return <ul className='reviews__list'>{reviewsList}</ul>;
+};
+
+ReviewsList.propTypes = {
+  reviews: PropTypes.array
 };
 
 export default ReviewsList;
