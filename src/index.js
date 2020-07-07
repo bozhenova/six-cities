@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { BrowserRouter } from 'react-router-dom';
-import { HashRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import { compose } from 'recompose';
 
@@ -25,15 +24,14 @@ const initApp = () => {
   );
 
   store.dispatch(Operations.loadOffers());
+  store.dispatch(Operations.loadLoginData());
 
   ReactDOM.render(
     <Provider store={store}>
       <ErrorBoundary>
-        <BrowserRouter>
-          <Router>
-            <App />
-          </Router>
-        </BrowserRouter>
+        <Router>
+          <App />
+        </Router>
       </ErrorBoundary>
     </Provider>,
     document.getElementById('root')

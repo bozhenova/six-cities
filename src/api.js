@@ -1,9 +1,8 @@
 import axios from 'axios';
-
-import { ActionCreators } from './redux/actions';
+import history from './history';
 import { Constants } from './constants';
 
-const configureAPI = dispatch => {
+const configureAPI = () => {
   const api = axios.create({
     baseURL: Constants.BASE_URL,
     timeout: Constants.TIMEOUT,
@@ -13,7 +12,7 @@ const configureAPI = dispatch => {
   const onSuccess = response => response.data;
   const onFail = err => {
     if (err.response.status === Constants.ACCESS_DENIED) {
-      dispatch(ActionCreators);
+      history.push(`/login`);
     }
     return err;
   };
