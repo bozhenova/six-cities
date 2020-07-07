@@ -1,6 +1,7 @@
 import { ActionCreators } from './actions';
 import { Constants } from '../constants';
 import { adaptOffers, adaptComments, adaptLoginResponse } from '../adapter';
+import history from '../history';
 
 const Operations = {
   loadOffers: () => (dispatch, _getState, api) => {
@@ -25,18 +26,19 @@ const Operations = {
         });
     };
   },
-  authorize: (email, password) => (dispatch, _getState, api) => {
-    return api
-      .post(Constants.LOGIN_PATH, { email, password })
-      .then(({ status, response }) => {
-        if (status === Constants.STATUS_OK) {
-          dispatch(ActionCreators.requiredAuthorization(false));
-          dispatch(ActionCreators.setError(``));
-          adaptLoginResponse(response);
-        }
-      })
-      .then(data => dispatch(ActionCreators.setUserData(data)))
-      .catch(() => dispatch(ActionCreators.setError(`Check login data`)));
+  loadLoginData: () => (dispatch, _getState, api) =>
+    api.get(Constants.LOGIN_PATH).then(response => {
+      const loginData = adaptLoginResponse(response);
+      dispatch(ActionCreators.setUserData(loginData));
+      dispatch(ActionCreators.requiredAuthorization(false));
+    }),
+  authorize: formData => (dispatch, _getState, api) => {
+    return api.post(Constants.LOGIN_PATH, formData).then(response => {
+      const loginData = adaptLoginResponse(response);
+      dispatch(ActionCreators.setUserData(loginData));
+      dispatch(ActionCreators.requiredAuthorization(false));
+      history.push(`/`);
+    });
   }
 };
 
