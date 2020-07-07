@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 
 const MapConfig = {
   ID: `map`,
-  MARKER_PATH: `img/pin.svg`,
-  ACTIVE_MARKER_PATH: `img/pin-active.svg`,
+  MARKER_PATH: `/img/pin.svg`,
+  ACTIVE_MARKER_PATH: `/img/pin-active.svg`,
   MARKER_SIZE: [30, 30],
   TITLE_LAYER: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`
 };

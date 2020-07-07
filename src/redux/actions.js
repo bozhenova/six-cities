@@ -33,8 +33,5 @@ export const ActionCreators = {
     type: types.SET_AUTHORIZATION_REQUIRED,
     payload: status
   }),
-  setError: error => ({
-    type: types.SET_ERROR,
-    payload: error
-  })
+
 };

@@ -1,7 +1,7 @@
 import { ActionTypes as types } from '../ActionTypes';
 
 const initialState = {
-  isAuthorizationRequired: false,
+  isAuthorizationRequired: true,
   loginData: {}
 };
 
