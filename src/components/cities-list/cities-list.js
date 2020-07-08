@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { ActionCreators } from '../../redux/actions';
-import City from '../city/city';
+import { ActionCreators } from '../../redux/reducer/data/actions';
+import City from '../city';
 const shortid = require('shortid');
 
 class CitiesList extends PureComponent {

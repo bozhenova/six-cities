@@ -1,4 +1,4 @@
-const getSortedOffers = (allOffers, city, sortType) => {
+export const getSortedOffers = (allOffers, city, sortType) => {
   const offers = allOffers.filter(offer => offer.city.name === city);
   switch (sortType) {
     case `popular`:
@@ -13,7 +13,6 @@ const getSortedOffers = (allOffers, city, sortType) => {
       break;
   }
 };
-export default getSortedOffers;
 
 const sortByPopular = offers => offers;
 

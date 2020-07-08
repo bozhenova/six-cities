@@ -2,24 +2,18 @@ import React, { PureComponent } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Operations from '../../redux/operations';
 
-import Main from '../../containers/main/';
-import SignInWrapped from '../sign-in/sign-in';
-import Favorites from '../favorites-page/favorites-page';
-import OfferDetails from '../../containers/offer-details/';
-import { Constants } from '../../constants';
+import SignInWrapped from '../sign-in';
+import Main from '../../containers/main';
+import Favorites from '../favorites-page';
+import OfferDetails from '../../containers/offer-details';
+import { Operations } from '../../redux/reducer/user/actions';
 
 class App extends PureComponent {
   static propTypes = {
     isAuthorizationRequired: PropTypes.bool.isRequired,
     loadLoginData: PropTypes.func.isRequired
   };
-
-  // componentDidMount() {
-  //   const { loadLoginData } = this.props;
-  //   loadLoginData();
-  // }
 
   render() {
     return (

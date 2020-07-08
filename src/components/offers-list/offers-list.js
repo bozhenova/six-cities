@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Operations from '../../redux/operations';
 
-import Card from '../card/card';
-import { ActionCreators } from '../../redux/actions';
+import Card from '../card';
+import { ActionCreators } from '../../redux/reducer/data/actions';
 
 class OffersList extends PureComponent {
   static defaultProps = {

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import history from './history';
-import { Constants } from './constants';
+import history from '../history';
+import { Constants } from '../constants';
 
 const configureAPI = () => {
   const api = axios.create({

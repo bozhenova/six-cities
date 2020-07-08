@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Review from '../review/review';
+import Review from '../review';
 
 const ReviewsList = ({ reviews }) => {
   const reviewsList = reviews.map(review => {

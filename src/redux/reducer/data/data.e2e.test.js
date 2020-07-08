@@ -1,9 +1,9 @@
 import { reducer } from './data';
 import configureAPI from '../../api';
 import MockAdapter from 'axios-mock-adapter';
-import Operations from '../operations';
-import { ActionTypes as types } from '../ActionTypes';
-import { Constants } from '../../constants';
+import Operations from '../../operations';
+import { ActionTypes as types } from '../../ActionTypes';
+import { Constants } from '../../../constants';
 
 describe('Reducer works correctly', () => {
   it('Should return initial state by default', () => {

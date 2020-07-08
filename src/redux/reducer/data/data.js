@@ -1,5 +1,5 @@
-import { ActionTypes as types } from '../ActionTypes';
-import getSortedOffers from '../selectors/get-sorted-offers';
+import { ActionTypes as types } from '../../ActionTypes';
+import { getSortedOffers } from './selectors';
 
 const initialState = {
   currentCity: '',
@@ -7,7 +7,6 @@ const initialState = {
   offers: [],
   filteredOffers: [],
   nearbyOffers: [],
-  reviews: [],
   currentOfferId: null,
   sortType: 'popular'
 };
@@ -52,11 +51,6 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         nearbyOffers: action.payload
-      };
-    case types.LOAD_REVIEWS:
-      return {
-        ...state,
-        reviews: action.payload
       };
   }
   return state;

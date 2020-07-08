@@ -1,4 +1,4 @@
-import { ActionTypes as types } from '../ActionTypes';
+import { ActionTypes as types } from '../../ActionTypes';
 
 const initialState = {
   isAuthorizationRequired: true,
