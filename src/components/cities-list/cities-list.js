@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+const shortid = require('shortid');
 
+import * as selectors from '../../redux/reducer/data/selectors';
 import { ActionCreators } from '../../redux/reducer/data/actions';
 import City from '../city';
-const shortid = require('shortid');
 
 class CitiesList extends PureComponent {
   changeCity = city => {
@@ -31,15 +32,15 @@ class CitiesList extends PureComponent {
 }
 
 CitiesList.propTypes = {
-  cities: PropTypes.array.isRequired,
-  currentCity: PropTypes.string,
+  currentCity: PropTypes.string.isRequired,
+  cities: PropTypes.array,
   changeCurrentCity: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    cities: state.data.cities,
-    currentCity: state.data.currentCity
+    cities: selectors.getUniqueCities(state),
+    currentCity: selectors.getCurrentCity(state)
   };
 };
 

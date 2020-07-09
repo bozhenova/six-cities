@@ -3,13 +3,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 const shortid = require('shortid');
 
-import Operations from '../../redux/operations';
-import HeaderWrapped from '../../components/header/header';
-import ReviewsList from '../../components/reviews-list/reviews-list';
-import Map from '../../components/map/map';
-import OffersList from '../../components/offers-list/offers-list';
+import * as DataSelectors from '../../redux/reducer/data/selectors';
+import * as ReviewsSelectors from '../../redux/reducer/reviews/selectors';
+import * as UserSelectors from '../../redux/reducer/user/selectors';
+import { Operations as ReviewsOperations } from '../../redux/reducer/reviews/actions';
+import {
+  Operations as DataOperations,
+  ActionCreators
+} from '../../redux/reducer/data/actions';
+import HeaderWrapped from '../../components/header';
+import ReviewsList from '../../components/reviews-list';
+import Map from '../../components/map';
+import OffersList from '../../components/offers-list';
 import { Constants } from '../../constants';
-import ReviewForm from '../../components/review-form/review-form';
+import ReviewForm from '../../components/review-form';
 
 class OfferDetails extends PureComponent {
   static propTypes = {
@@ -47,7 +54,8 @@ class OfferDetails extends PureComponent {
       host,
       description,
       images,
-      goods
+      goods,
+      id
     } = offer;
 
     const gallery = images.slice(0, Constants.AMOUNT_PHOTOS).map(image => (
@@ -155,7 +163,9 @@ class OfferDetails extends PureComponent {
                       <span className='reviews__amount'>{reviews.length}</span>
                     </h2>
                     <ReviewsList reviews={reviews} />
-                    {!isAuthorizationRequired && <ReviewForm />}
+                    {!isAuthorizationRequired && (
+                      <ReviewForm currentOfferId={id} />
+                    )}
                   </section>
                 ) : null}
               </div>
@@ -187,17 +197,17 @@ class OfferDetails extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  currentCity: state.data.currentCity,
-  offers: state.data.filteredOffers,
-  nearbyOffers: state.data.nearbyOffers,
-  reviews: state.data.reviews,
-  isAuthorizationRequired: state.user.isAuthorizationRequired
+  currentCity: DataSelectors.getCurrentCity(state),
+  offers: DataSelectors.getSortedOffers(state),
+  nearbyOffers: DataSelectors.getNearbyOffers(state),
+  reviews: ReviewsSelectors.getReviews(state),
+  isAuthorizationRequired: UserSelectors.getAuthorizationStatus(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   setCurrentOffer: id => dispatch(ActionCreators.setCurrentOffer(id)),
-  loadReviews: id => dispatch(Operations.loadReviews(id)),
-  loadNearbyOffers: id => dispatch(Operations.loadNearbyOffers(id))
+  loadReviews: id => dispatch(ReviewsOperations.loadReviews(id)),
+  loadNearbyOffers: id => dispatch(DataOperations.loadNearbyOffers(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OfferDetails);

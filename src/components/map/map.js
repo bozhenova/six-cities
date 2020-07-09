@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import { connect } from 'react-redux';
+import * as selectors from '../../redux/reducer/data/selectors';
 
 const MapConfig = {
   ID: `map`,
@@ -14,12 +15,10 @@ const MapConfig = {
 class Map extends PureComponent {
   static propTypes = {
     offers: PropTypes.array.isRequired,
-    filteredOffers: PropTypes.array.isRequired,
-    currentOfferId: PropTypes.number
+    currentOfferCoords: PropTypes.array.isRequired
   };
 
   static defaultProps = {
-    currentOfferId: null,
     offers: []
   };
 
@@ -35,21 +34,13 @@ class Map extends PureComponent {
     iconSize: MapConfig.MARKER_SIZE
   });
 
-  getCurrentOffer = () => {
-    const { currentOfferId, filteredOffers } = this.props;
-    const currentOffer = filteredOffers.find(
-      item => item.id === currentOfferId
-    );
-    return currentOffer ? currentOffer.place.coords : [0, 0];
-  };
-
   addMarkers() {
     this.group = leaflet.layerGroup().addTo(this.map);
     for (let item of this.coordinates) {
       leaflet.marker(item, { icon: this.icon }).addTo(this.group);
     }
     leaflet
-      .marker(this.getCurrentOffer(), { icon: this.activeIcon })
+      .marker(this.props.currentOfferCoords, { icon: this.activeIcon })
       .addTo(this.group);
   }
 
@@ -83,7 +74,7 @@ class Map extends PureComponent {
     }
 
     leaflet
-      .marker(this.getCurrentOffer(), { icon: this.activeIcon })
+      .marker(this.props.currentOfferCoords, { icon: this.activeIcon })
       .addTo(this.group);
   }
 
@@ -99,8 +90,7 @@ class Map extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  currentOfferId: state.data.currentOfferId,
-  filteredOffers: state.data.filteredOffers
+  currentOfferCoords: selectors.getCurrentOfferCoords(state)
 });
 
 export { Map };

@@ -8,6 +8,7 @@ import Main from '../../containers/main';
 import Favorites from '../favorites-page';
 import OfferDetails from '../../containers/offer-details';
 import { Operations } from '../../redux/reducer/user/actions';
+import * as selectors from '../../redux/reducer/user/selectors';
 
 class App extends PureComponent {
   static propTypes = {
@@ -29,7 +30,7 @@ class App extends PureComponent {
 }
 const mapStateToProps = state => {
   return {
-    isAuthorizationRequired: state.user.isAuthorizationRequired
+    isAuthorizationRequired: selectors.getAuthorizationStatus(state)
   };
 };
 
