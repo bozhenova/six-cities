@@ -1,7 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import withLoginData from '../../hoc/with-login-data';
+import { Constants } from '../../constants';
 
-const Header = () => {
+const Header = ({ user, handleSignInClick }) => {
+  const isSignedIn = user.email ? (
+    <span className='header__user-name user__name'>{user.email}</span>
+  ) : (
+    <span className='header__login' onClick={handleSignInClick}>
+      Sign in
+    </span>
+  );
+
   return (
     <header className='header'>
       <div className='container'>
@@ -13,7 +23,7 @@ const Header = () => {
             >
               <img
                 className='header__logo'
-                src='img/logo.svg'
+                src='/img/logo.svg'
                 alt='6 cities logo'
                 width='81'
                 height='41'
@@ -23,15 +33,20 @@ const Header = () => {
           <nav className='header__nav'>
             <ul className='header__nav-list'>
               <li className='header__nav-item user'>
-                <a
+                <Link
+                  to={user.email ? `/favorites` : `/login`}
                   className='header__nav-link header__nav-link--profile'
-                  href='#'
                 >
-                  <div className='header__avatar-wrapper user__avatar-wrapper' />
-                  <span className='header__user-name user__name'>
-                    Oliver.conner@gmail.com
-                  </span>
-                </a>
+                  <div
+                    className='header__avatar-wrapper user__avatar-wrapper'
+                    style={
+                      user.avatarUrl && {
+                        backgroundImage: `url(${Constants.BASE_URL}${user.avatarUrl})`
+                      }
+                    }
+                  />
+                  {isSignedIn}
+                </Link>
               </li>
             </ul>
           </nav>
@@ -41,4 +56,5 @@ const Header = () => {
   );
 };
 
-export default Header;
+const HeaderWrapped = withLoginData(Header);
+export default HeaderWrapped;
