@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+
 import FavoriteButton from '../favorite-button';
 import { Constants } from '../../constants';
 
@@ -17,16 +18,22 @@ const Card = ({
   },
   mainClassMod = ``,
   classModPrefix = ``,
-  selectOffer
+  selectOffer,
+  match,
+  toggleFavorite
 }) => {
   const onOfferHover = () => {
     selectOffer(id);
   };
 
+  const onFavButtonClick = () => {
+    toggleFavorite(id);
+  };
+
   return (
     <article
       className={`${mainClassMod} place-card`}
-      onMouseEnter={onOfferHover}
+      onMouseEnter={selectOffer ? onOfferHover : null}
     >
       {isPremium ? (
         <div className='place-card__mark'>
@@ -41,8 +48,8 @@ const Card = ({
             <img
               className='place-card__image'
               src={previewPhoto}
-              width='260'
-              height='200'
+              width={`${match.path === `/favorites` ? `150` : `260`}`}
+              height={`${match.path === `/favorites` ? `110` : `200`}`}
               alt={title}
             />
           </Link>
@@ -58,6 +65,7 @@ const Card = ({
             id={id}
             isFavorite={isFavorite}
             prefixClass={'place-card'}
+            onClick={toggleFavorite ? onFavButtonClick : null}
           />
         </div>
         <div className='place-card__rating rating'>
@@ -92,7 +100,8 @@ Card.propTypes = {
   }),
   classModPrefix: PropTypes.string.isRequired,
   mainClassMod: PropTypes.string.isRequired,
-  selectOffer: PropTypes.func.isRequired
+  selectOffer: PropTypes.func,
+  toggleFavorite: PropTypes.func
 };
-
-export default Card;
+const CardWrapped = withRouter(Card);
+export default CardWrapped;

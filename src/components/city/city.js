@@ -25,7 +25,7 @@ const City = ({ city, currentCity, changeCity }) => {
 City.propTypes = {
   city: PropTypes.string.isRequired,
   changeCity: PropTypes.func.isRequired,
-  currentCity: PropTypes.string
+  currentCity: PropTypes.string.isRequired
 };
 
 export default City;

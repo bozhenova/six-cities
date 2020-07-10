@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import HeaderWrapped from '../../components/header/header';
-import MainEmpty from '../../components/main-empty/main-empty';
-import Map from '../../components/map/map';
-import OffersList from '../../components/offers-list/offers-list';
-import CitiesList from '../../components/cities-list/cities-list';
-import Select from '../../components/select/select';
-import { ActionCreators } from '../../redux/actions';
+
+import * as selectors from '../../redux/reducer/data/selectors';
+import HeaderWrapped from '../../components/header';
+import MainEmpty from '../../components/main-empty';
+import Map from '../../components/map';
+import OffersList from '../../components/offers-list';
+import CitiesList from '../../components/cities-list';
+import Select from '../../components/select';
+import { ActionCreators as DataActions } from '../../redux/reducer/data/actions';
+import { ActionCreators as UserActions } from '../../redux/reducer/user/actions';
 
 class Main extends Component {
   static propTypes = {
@@ -66,15 +69,14 @@ class Main extends Component {
 }
 
 const mapStateToProps = state => ({
-  currentCity: state.data.currentCity,
-  currentOfferId: state.data.currentOfferId,
-  offers: state.data.filteredOffers
+  currentCity: selectors.getCurrentCity(state),
+  currentOfferId: selectors.getCurrentOfferId(state),
+  offers: selectors.getSortedOffers(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  setSortType: type => dispatch(ActionCreators.setSortType(type)),
-  requireAuthorization: () =>
-    dispatch(ActionCreators.requiredAuthorization(true))
+  setSortType: type => dispatch(DataActions.setSortType(type)),
+  requireAuthorization: () => dispatch(UserActions.requiredAuthorization(true))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
