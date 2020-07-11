@@ -9,7 +9,7 @@ import * as UserSelectors from '../../redux/reducer/user/selectors';
 import { Operations as ReviewsOperations } from '../../redux/reducer/reviews/actions';
 import {
   Operations as DataOperations,
-  ActionCreators
+  ActionCreator
 } from '../../redux/reducer/data/actions';
 import HeaderWrapped from '../../components/header';
 import ReviewsList from '../../components/reviews-list';
@@ -205,7 +205,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentOffer: id => dispatch(ActionCreators.setCurrentOffer(id)),
+  setCurrentOffer: id => dispatch(ActionCreator.setCurrentOffer(id)),
   loadReviews: id => dispatch(ReviewsOperations.loadReviews(id)),
   loadNearbyOffers: id => dispatch(DataOperations.loadNearbyOffers(id))
 });

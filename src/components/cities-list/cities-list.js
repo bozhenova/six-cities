@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 const shortid = require('shortid');
 
 import * as selectors from '../../redux/reducer/data/selectors';
-import { ActionCreators } from '../../redux/reducer/data/actions';
+import { ActionCreator } from '../../redux/reducer/data/actions';
 import City from '../city';
 
 class CitiesList extends PureComponent {
@@ -45,7 +45,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  changeCurrentCity: city => dispatch(ActionCreators.setCity(city))
+  changeCurrentCity: city => dispatch(ActionCreator.setCity(city))
 });
 
 export { CitiesList };

@@ -3,7 +3,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
 import history from '../history';
-import { ActionCreators } from '../redux/reducer/user/actions';
+import { ActionCreator } from '../redux/reducer/user/actions';
 import * as selectors from '../redux/reducer/user/selectors';
 
 const withLoginData = Component => {
@@ -35,7 +35,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   requireAuthorization: () =>
-    dispatch(ActionCreators.requiredAuthorization(true))
+    dispatch(ActionCreator.requiredAuthorization(true))
 });
 
 export default compose(

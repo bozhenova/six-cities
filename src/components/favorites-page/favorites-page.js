@@ -7,7 +7,7 @@ import HeaderWrapped from '../header';
 import * as selectors from '../../redux/reducer/favorites/selectors';
 import {
   Operations,
-  ActionCreators
+  ActionCreator
 } from '../../redux/reducer/favorites/actions';
 import FavoritesEmpty from '../favorites-empty';
 import CardWrapped from '../card';
@@ -91,7 +91,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadFavorites: () => dispatch(Operations.loadFavorites()),
-  updateFavorites: offer => dispatch(ActionCreators.updateFavorites(offer))
+  updateFavorites: offer => dispatch(ActionCreator.updateFavorites(offer))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

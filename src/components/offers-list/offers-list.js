@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Card from '../card';
-import { ActionCreators } from '../../redux/reducer/data/actions';
+import { ActionCreator } from '../../redux/reducer/data/actions';
 
 class OffersList extends PureComponent {
   static defaultProps = {
@@ -47,7 +47,7 @@ class OffersList extends PureComponent {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentOffer: id => dispatch(ActionCreators.setCurrentOffer(id))
+  setCurrentOffer: id => dispatch(ActionCreator.setCurrentOffer(id))
 });
 
 export { OffersList };
