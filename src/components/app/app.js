@@ -1,14 +1,16 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Suspense, lazy } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import SignInWrapped from '../sign-in';
-import Main from '../../containers/main';
-import Favorites from '../favorites-page';
-import OfferDetails from '../../containers/offer-details';
 import { Operations } from '../../redux/reducer/user/actions';
 import * as selectors from '../../redux/reducer/user/selectors';
+import Spinner from '../spinner';
+import OfferDetails from '../../containers/offer-details';
+const Main = lazy(() => import('../../containers/main'));
+const SignInWrapped = lazy(() => import('../sign-in'));
+const Favorites = lazy(() => import('../../containers/favorites-page'));
+// const OfferDetails = lazy(() => import('../../containers/offer-details'));
 
 class App extends PureComponent {
   static propTypes = {
@@ -18,13 +20,15 @@ class App extends PureComponent {
 
   render() {
     return (
-      <Switch>
-        <Route exact path='/' component={Main} />
-        <Route path='/login' component={SignInWrapped} />
-        <Route path='/favorites' component={Favorites} />
-        <Route path='/offer/:id' component={OfferDetails} />
-        <Redirect from='*' to='/' />
-      </Switch>
+      <Suspense fallback={<Spinner />}>
+        <Switch>
+          <Route exact path='/' component={Main} />
+          <Route path='/login' component={SignInWrapped} />
+          <Route path='/favorites' component={Favorites} />
+          <Route path='/offer/:id' component={OfferDetails} />
+          <Redirect from='*' to='/' />
+        </Switch>
+      </Suspense>
     );
   }
 }
