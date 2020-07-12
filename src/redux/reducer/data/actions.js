@@ -2,7 +2,7 @@ import { ActionTypes as types } from '../../ActionTypes';
 import { Constants } from '../../../constants';
 import { adaptOffers } from '../../../adapter';
 
-export const ActionCreators = {
+export const ActionCreator = {
   setCity: city => ({
     type: types.SET_CITY,
     payload: city
@@ -30,12 +30,12 @@ export const Operations = {
     return api
       .get(Constants.HOTEL_PATH)
       .then(response => adaptOffers(response))
-      .then(data => dispatch(ActionCreators.loadOffers(data)));
+      .then(data => dispatch(ActionCreator.loadOffers(data)));
   },
   loadNearbyOffers: id => (dispatch, _getState, api) => {
     return api
       .get(`${Constants.HOTEL_PATH}/${id}${Constants.NEARBY_PATH}`)
       .then(response => adaptOffers(response))
-      .then(data => dispatch(ActionCreators.loadNearbyOffers(data)));
+      .then(data => dispatch(ActionCreator.loadNearbyOffers(data)));
   }
 };

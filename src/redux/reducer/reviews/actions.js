@@ -15,6 +15,10 @@ export const ActionCreator = {
     type: types.SET_SENDING_STATUS,
     payload: isSent
   }),
+  lockForm: isLock => ({
+    type: types.LOCK_FORM,
+    payload: isLock
+  }),
   setError: error => ({
     type: types.SET_ERROR,
     payload: error
@@ -42,11 +46,13 @@ export const Operations = {
         .then(response => adaptComments(response))
         .then(data => {
           dispatch(ActionCreator.postReview(data));
+          dispatch(ActionCreator.lockForm(false));
           dispatch(ActionCreator.setSendingStatus(true));
           dispatch(ActionCreator.setError(''));
         })
         .catch(error => {
           dispatch(ActionCreator.setError(error));
+          dispatch(ActionCreator.lockForm(false));
         });
     };
   }

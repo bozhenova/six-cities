@@ -1,5 +1,3 @@
-import { createSelector } from 'reselect';
-
 export const getAuthorizationStatus = state =>
   state.user.isAuthorizationRequired;
 export const getLoginData = state => state.user.loginData;

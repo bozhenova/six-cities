@@ -9,8 +9,8 @@ import Map from '../../components/map';
 import OffersList from '../../components/offers-list';
 import CitiesList from '../../components/cities-list';
 import Select from '../../components/select';
-import { ActionCreators as DataActions } from '../../redux/reducer/data/actions';
-import { ActionCreators as UserActions } from '../../redux/reducer/user/actions';
+import { ActionCreator as DataActions } from '../../redux/reducer/data/actions';
+import { ActionCreator as UserActions } from '../../redux/reducer/user/actions';
 
 class Main extends Component {
   static propTypes = {

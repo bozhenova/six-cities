@@ -17,6 +17,8 @@ export const reducer = (state = initialState, action) => {
       return { ...state, error: action.payload };
     case types.SET_SENDING_STATUS:
       return { ...state, isSent: action.payload };
+    case types.LOCK_FORM:
+      return { ...state, isSending: action.payload };
   }
 
   return state;

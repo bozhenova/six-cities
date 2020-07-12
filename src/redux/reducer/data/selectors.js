@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { findItemById } from '../../../utils';
 
 export const getOffers = state => state.data.offers;
 export const getNearbyOffers = state => state.data.nearbyOffers;
@@ -36,7 +37,7 @@ export const getCurrentOfferCoords = createSelector(
   getCurrentOfferId,
   getSortedOffers,
   (currentOfferId, offers) => {
-    const currentOffer = offers.find(offer => offer.id === currentOfferId);
+    const currentOffer = findItemById(currentOfferId, offers);
     return currentOffer ? currentOffer.place.coords : [0, 0];
   }
 );

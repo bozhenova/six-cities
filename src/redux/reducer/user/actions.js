@@ -3,7 +3,7 @@ import { Constants } from '../../../constants';
 import { adaptLoginResponse } from '../../../adapter';
 import history from '../../../history';
 
-export const ActionCreators = {
+export const ActionCreator = {
   setUserData: user => ({
     type: types.SET_USER_DATA,
     payload: user
@@ -23,18 +23,18 @@ export const Operations = {
     api.get(Constants.LOGIN_PATH).then(response => {
       if (response.status === Constants.STATUS_OK) {
         const loginData = adaptLoginResponse(response);
-        dispatch(ActionCreators.setUserData(loginData));
-        dispatch(ActionCreators.requiredAuthorization(false));
+        dispatch(ActionCreator.setUserData(loginData));
+        dispatch(ActionCreator.requiredAuthorization(false));
       } else {
-        dispatch(ActionCreators.setError(response.message));
+        dispatch(ActionCreator.setError(response.message));
       }
     });
   },
   authorize: formData => (dispatch, _getState, api) => {
     return api.post(Constants.LOGIN_PATH, formData).then(response => {
       const loginData = adaptLoginResponse(response);
-      dispatch(ActionCreators.setUserData(loginData));
-      dispatch(ActionCreators.requiredAuthorization(false));
+      dispatch(ActionCreator.setUserData(loginData));
+      dispatch(ActionCreator.requiredAuthorization(false));
       history.push(`/`);
     });
   }
