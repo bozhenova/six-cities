@@ -25,8 +25,10 @@ export const reducer = (state = initialState, action) => {
     case types.LOAD_OFFERS:
       return {
         ...state,
-        currentCity: action.payload[0].city.name,
-        offers: action.payload
+        offers: action.payload,
+        currentCity: !state.currentCity
+          ? action.payload[0].city.name
+          : state.currentCity
       };
     case types.LOAD_NEARBY_OFFERS:
       return {

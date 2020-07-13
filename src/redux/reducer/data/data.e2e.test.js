@@ -1,7 +1,7 @@
 import { reducer } from './data';
-import configureAPI from '../../api';
+import configureAPI from '../../../services/api';
 import MockAdapter from 'axios-mock-adapter';
-import Operations from '../../operations';
+import Operations from './actions';
 import { ActionTypes as types } from '../../ActionTypes';
 import { Constants } from '../../../constants';
 
