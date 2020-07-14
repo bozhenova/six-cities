@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 const shortid = require('shortid');
 
-import * as selectors from '../../redux/reducer/data/selectors';
+import {
+  getUniqueCities,
+  getCurrentCity
+} from '../../redux/reducer/data/selectors';
 import { ActionCreator } from '../../redux/reducer/data/actions';
 import City from '../city';
 
@@ -39,8 +42,8 @@ CitiesList.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    cities: selectors.getUniqueCities(state),
-    currentCity: selectors.getCurrentCity(state)
+    cities: getUniqueCities(state),
+    currentCity: getCurrentCity(state)
   };
 };
 

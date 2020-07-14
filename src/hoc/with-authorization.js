@@ -3,6 +3,8 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
 import { Operations } from '../redux/reducer/user/actions';
+import { getCurrentCity } from '../redux/reducer/data/selectors';
+import { getAuthorizationStatus } from '../redux/reducer/user/selectors';
 
 const withAuthorization = Component => {
   class WithAuthorization extends React.PureComponent {
@@ -29,6 +31,7 @@ const withAuthorization = Component => {
 
     render() {
       const { email, password } = this.state;
+      const { city, isAuthRequired } = this.props;
 
       return (
         <Component
@@ -37,7 +40,9 @@ const withAuthorization = Component => {
           onPasswordChange={this.handlePasswordChange}
           onFormSubmit={this.handleFormSubmit}
           emailValue={email}
+          isAuthRequired={isAuthRequired}
           passwordValue={password}
+          city={city}
         />
       );
     }
@@ -46,8 +51,16 @@ const withAuthorization = Component => {
   return WithAuthorization;
 };
 
+const mapStatetoProps = state => ({
+  city: getCurrentCity(state),
+  isAuthRequired: getAuthorizationStatus(state)
+});
+
 const mapDispatchToProps = dispatch => ({
   authorize: formData => dispatch(Operations.authorize(formData))
 });
 
-export default compose(connect(null, mapDispatchToProps), withAuthorization);
+export default compose(
+  connect(mapStatetoProps, mapDispatchToProps),
+  withAuthorization
+);

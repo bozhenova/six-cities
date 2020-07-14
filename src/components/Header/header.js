@@ -55,6 +55,6 @@ const Header = ({ user, handleSignInClick }) => {
     </header>
   );
 };
-
+export { Header };
 const HeaderWrapped = withLoginData(Header);
 export default HeaderWrapped;

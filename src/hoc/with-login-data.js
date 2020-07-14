@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import history from '../history';
 import { ActionCreator } from '../redux/reducer/user/actions';
-import * as selectors from '../redux/reducer/user/selectors';
+import { getLoginData } from '../redux/reducer/user/selectors';
 
 const withLoginData = Component => {
   class WithLoginData extends PureComponent {
@@ -30,7 +30,7 @@ const withLoginData = Component => {
 };
 
 const mapStateToProps = state => ({
-  user: selectors.getLoginData(state)
+  user: getLoginData(state)
 });
 
 const mapDispatchToProps = dispatch => ({

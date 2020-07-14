@@ -2,30 +2,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import * as selectors from '../../redux/reducer/data/selectors';
+import {
+  getCurrentCity,
+  getCurrentOfferId,
+  getSortedOffers
+} from '../../redux/reducer/data/selectors';
 import HeaderWrapped from '../../components/header';
 import MainEmpty from '../../components/main-empty';
 import Map from '../../components/map';
 import OffersList from '../../components/offers-list';
 import CitiesList from '../../components/cities-list';
-import Select from '../../components/select';
-import { ActionCreator as DataActions } from '../../redux/reducer/data/actions';
+import SelectWrapped from '../../components/select';
 import { ActionCreator as UserActions } from '../../redux/reducer/user/actions';
 
 class Main extends Component {
   static propTypes = {
     offers: PropTypes.array.isRequired,
     currentCity: PropTypes.string.isRequired,
-    currentOfferId: PropTypes.number,
-    setSortType: PropTypes.func.isRequired
-  };
-
-  onSelectChange = e => {
-    this.props.setSortType(e.target.value);
+    currentOfferId: PropTypes.number
   };
 
   render() {
-    const { currentCity, offers, match } = this.props;
+    const { currentCity, offers } = this.props;
 
     return (
       <div className='page page--gray page--main'>
@@ -45,9 +43,8 @@ class Main extends Component {
                   <b className='places__found'>
                     {offers.length} places to stay in {currentCity}
                   </b>
-                  <Select handleSelectChange={this.onSelectChange} />
+                  <SelectWrapped />
                   <OffersList
-                    match={match}
                     offers={offers}
                     classModOffers={[`cities__places-list`, `tabs__content`]}
                     classModPrefix={`cities`}
@@ -69,13 +66,12 @@ class Main extends Component {
 }
 
 const mapStateToProps = state => ({
-  currentCity: selectors.getCurrentCity(state),
-  currentOfferId: selectors.getCurrentOfferId(state),
-  offers: selectors.getSortedOffers(state)
+  currentCity: getCurrentCity(state),
+  currentOfferId: getCurrentOfferId(state),
+  offers: getSortedOffers(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  setSortType: type => dispatch(DataActions.setSortType(type)),
   requireAuthorization: () => dispatch(UserActions.requiredAuthorization(true))
 });
 

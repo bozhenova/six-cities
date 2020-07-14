@@ -11,7 +11,13 @@ const SignIn = props => {
     onFormSubmit();
   };
 
-  const { onEmailChange, onPasswordChange, emailValue, passwordValue } = props;
+  const {
+    onEmailChange,
+    onPasswordChange,
+    emailValue,
+    passwordValue,
+    city
+  } = props;
   return (
     <div className='page page--gray page--login'>
       <HeaderWrapped />
@@ -63,7 +69,7 @@ const SignIn = props => {
           <section className='locations locations--login locations--current'>
             <div className='locations__item'>
               <a className='locations__item-link' href='#'>
-                <span>Amsterdam</span>
+                <span>{city}</span>
               </a>
             </div>
           </section>
@@ -80,6 +86,7 @@ SignIn.propTypes = {
   emailValue: PropTypes.string.isRequired,
   passwordValue: PropTypes.string.isRequired
 };
+export { SignIn };
 
 const SignInWrapped = withAuthorization(SignIn);
 export default SignInWrapped;

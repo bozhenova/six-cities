@@ -9,15 +9,14 @@ const City = ({ city, currentCity, changeCity }) => {
 
   return (
     <li className='locations__item'>
-      <button
-        type='button'
+      <a
         className={`locations__item-link tabs__item ${
           currentCity === city ? `tabs__item--active` : ``
         }`}
         onClick={onCityClick}
       >
         <span>{city}</span>
-      </button>
+      </a>
     </li>
   );
 };

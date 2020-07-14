@@ -11,11 +11,16 @@ import App from './components/app';
 import configureAPI from './services/api';
 import rootReducer from './redux/reducer';
 import ErrorBoundary from './components/error-boundary';
-import { Operations as UserOperations } from './redux/reducer/user/actions';
+import {
+  Operations as UserOperations,
+  ActionCreator
+} from './redux/reducer/user/actions';
 import { Operations as DataOperations } from './redux/reducer/data/actions';
 
 const initApp = () => {
-  const api = configureAPI(() => history.push('/login'));
+  const api = configureAPI(() => {
+    store.dispatch(ActionCreator.requiredAuthorization(true));
+  });
   const store = createStore(
     rootReducer,
     compose(
