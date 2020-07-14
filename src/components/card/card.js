@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
-
-import FavoriteButton from '../favorite-button';
+import FavoriteButtonWrapped from '../favorite-button';
 import { Constants } from '../../constants';
 
 const Card = ({
@@ -19,21 +18,24 @@ const Card = ({
   mainClassMod = ``,
   classModPrefix = ``,
   selectOffer,
-  match,
-  toggleFavorite
+  match
 }) => {
   const onOfferHover = () => {
-    selectOffer(id);
+    if (match.path === '/') {
+      selectOffer(id);
+    }
   };
-
-  const onFavButtonClick = () => {
-    toggleFavorite(id);
+  const onOfferClick = () => {
+    if (match.path === '/offer/:id') {
+      selectOffer(id);
+    }
   };
 
   return (
     <article
       className={`${mainClassMod} place-card`}
-      onMouseEnter={selectOffer ? onOfferHover : null}
+      onClick={onOfferClick}
+      onMouseEnter={onOfferHover}
     >
       {isPremium ? (
         <div className='place-card__mark'>
@@ -61,11 +63,13 @@ const Card = ({
             <b className='place-card__price-value'>&euro;{price}</b>
             <span className='place-card__price-text'>&#47;&nbsp;night</span>
           </div>
-          <FavoriteButton
+          <FavoriteButtonWrapped
             id={id}
             isFavorite={isFavorite}
             prefixClass={'place-card'}
-            onClick={toggleFavorite ? onFavButtonClick : null}
+            width={18}
+            height={19}
+            match={match}
           />
         </div>
         <div className='place-card__rating rating'>
@@ -88,20 +92,12 @@ const Card = ({
 };
 
 Card.propTypes = {
-  offerDetails: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    previewPhoto: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired
-  }),
+  offerDetails: PropTypes.object.isRequired,
   classModPrefix: PropTypes.string.isRequired,
   mainClassMod: PropTypes.string.isRequired,
-  selectOffer: PropTypes.func,
-  toggleFavorite: PropTypes.func
+  selectOffer: PropTypes.func
 };
+
+export { Card };
 const CardWrapped = withRouter(Card);
 export default CardWrapped;
