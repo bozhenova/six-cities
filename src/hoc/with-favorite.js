@@ -1,23 +1,46 @@
 import React, { PureComponent } from 'react';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import { findItemById } from '../utils';
-import { Operations } from '../redux/reducer/favorites/actions';
-import * as selectors from '../redux/reducer/data/selectors';
+import { Operations as DataOperations } from '../redux/reducer/data/actions';
+import { Operations as FavoritesOperations } from '../redux/reducer/favorites/actions';
+import {
+  getSortedOffers,
+  getCurrentOfferId
+} from '../redux/reducer/data/selectors';
+import { getAuthorizationStatus } from '../redux/reducer/user/selectors';
 
 const withFavorite = Component => {
   class WithFavorite extends PureComponent {
-    updateFavoriteOffers = id => {
-      const { offers, updateFavorites } = this.props;
-      const offer = findItemById(id, offers);
-      updateFavorites(id, offer);
+    updateFavoriteOffers = (id, isFavorite, match) => {
+      const { updateFavorites } = this.props;
+      updateFavorites(id, isFavorite);
+      this.updateOffers(match);
+    };
+
+    updateOffers = match => {
+      const {
+        currentOfferId,
+        loadNearbyOffers,
+        loadFavorites,
+        loadOffers
+      } = this.props;
+      switch (match.path) {
+        case '/offer/:id':
+          loadNearbyOffers(currentOfferId);
+        case '/favorites':
+          loadFavorites();
+        case '/':
+          loadOffers();
+      }
     };
 
     render() {
+      const { isAuthRequired } = this.props;
       return (
         <Component
           {...this.props}
           updateFavoriteOffers={this.updateFavoriteOffers}
+          isAuthRequired={isAuthRequired}
         />
       );
     }
@@ -27,13 +50,17 @@ const withFavorite = Component => {
 };
 
 const mapStateToProps = state => ({
-  offers: selectors.getSortedOffers(state),
-  currentOfferId: selectors.getCurrentOfferId(state)
+  offers: getSortedOffers(state),
+  currentOfferId: getCurrentOfferId(state),
+  isAuthRequired: getAuthorizationStatus(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateFavorites: (id, offer) =>
-    dispatch(Operations.updateFavorites(id, offer))
+  updateFavorites: (id, isFavorite) =>
+    dispatch(FavoritesOperations.updateFavorites(id, isFavorite)),
+  loadNearbyOffers: id => dispatch(DataOperations.loadNearbyOffers(id)),
+  loadFavorites: () => dispatch(FavoritesOperations.loadFavorites()),
+  loadOffers: () => dispatch(DataOperations.loadOffers())
 });
 
 export default compose(
