@@ -4,6 +4,7 @@ exports[`Favorite Button should render a favorite button 1`] = `
 <button
   aria-pressed="false"
   className="undefined__bookmark-button  button"
+  onClick={[Function]}
   type="button"
 >
   <svg

@@ -1,18 +1,35 @@
 import React from 'react';
+import withFavorite from '../../hoc/with-favorite';
+import { Constants } from '../../constants';
+import history from '../../history';
 
 const FavoriteButton = ({
   isFavorite,
   prefixClass,
-  width = 18,
-  height = 19
+  width,
+  height,
+  id,
+  isAuthRequired,
+  updateFavoriteOffers,
+  match
 }) => {
+  const onButtonClick = () => {
+    if (isAuthRequired) {
+      history.push(Constants.LOGIN_PATH);
+      return;
+    }
+    updateFavoriteOffers(id, isFavorite, match);
+  };
   return (
     <button
       type='button'
       className={`${prefixClass}__bookmark-button ${
-        isFavorite ? `place-card__bookmark-button--active` : ``
+        !isAuthRequired && isFavorite
+          ? `place-card__bookmark-button--active`
+          : ``
       } button`}
       aria-pressed={isFavorite ? `true` : `false`}
+      onClick={onButtonClick}
     >
       <svg
         className={'place-card__bookmark-icon'}
@@ -29,4 +46,6 @@ const FavoriteButton = ({
   );
 };
 
-export default FavoriteButton;
+export { FavoriteButton };
+const FavoriteButtonWrapped = withFavorite(FavoriteButton);
+export default FavoriteButtonWrapped;

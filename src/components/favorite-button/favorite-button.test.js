@@ -1,5 +1,5 @@
 import React from 'react';
-import FavoriteButton from './favorite-button';
+import { FavoriteButton } from './favorite-button';
 import renderer from 'react-test-renderer';
 
 describe('Favorite Button', () => {
