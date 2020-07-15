@@ -3,11 +3,16 @@ import { Link } from 'react-router-dom';
 import withLoginData from '../../hoc/with-login-data';
 import { Constants } from '../../constants';
 
-const Header = ({ user, handleSignInClick }) => {
+const Header = ({ user, handleSignInClick, handleKeyPress }) => {
   const isSignedIn = user.email ? (
     <span className='header__user-name user__name'>{user.email}</span>
   ) : (
-    <span className='header__login' onClick={handleSignInClick}>
+    <span
+      className='header__login'
+      onClick={handleSignInClick}
+      tabIndex={0}
+      onKeyPress={handleKeyPress}
+    >
       Sign in
     </span>
   );

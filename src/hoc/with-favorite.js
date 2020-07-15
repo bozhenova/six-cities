@@ -25,12 +25,12 @@ const withFavorite = Component => {
         loadOffers
       } = this.props;
       switch (match.path) {
+        case '/':
+          loadOffers();
         case '/offer/:id':
           loadNearbyOffers(currentOfferId);
         case '/favorites':
           loadFavorites();
-        case '/':
-          loadOffers();
       }
     };
 

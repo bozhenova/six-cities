@@ -1,10 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { KeyCodes } from '../../constants';
 
 const City = ({ city, currentCity, changeCity }) => {
-  const onCityClick = e => {
+  const handleClick = e => {
     e.preventDefault();
     changeCity(city);
+  };
+
+  const handleKeyPress = e => {
+    e.preventDefault();
+    if (e.key === KeyCodes.ENTER) {
+      changeCity(city);
+    }
   };
 
   return (
@@ -13,7 +21,9 @@ const City = ({ city, currentCity, changeCity }) => {
         className={`locations__item-link tabs__item ${
           currentCity === city ? `tabs__item--active` : ``
         }`}
-        onClick={onCityClick}
+        onClick={handleClick}
+        tabIndex={0}
+        onKeyPress={handleKeyPress}
       >
         <span>{city}</span>
       </a>

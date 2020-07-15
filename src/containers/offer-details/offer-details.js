@@ -3,20 +3,26 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 const shortid = require('shortid');
 
-import * as DataSelectors from '../../redux/reducer/data/selectors';
-import * as ReviewsSelectors from '../../redux/reducer/reviews/selectors';
-import * as UserSelectors from '../../redux/reducer/user/selectors';
+import {
+  getCurrentCity,
+  getSortedOffers,
+  getNearbyOffers
+} from '../../redux/reducer/data/selectors';
+import { getReviews } from '../../redux/reducer/reviews/selectors';
+import { getAuthorizationStatus } from '../../redux/reducer/user/selectors';
 import { Operations as ReviewsOperations } from '../../redux/reducer/reviews/actions';
 import {
   Operations as DataOperations,
   ActionCreator
 } from '../../redux/reducer/data/actions';
+
 import HeaderWrapped from '../../components/header';
 import ReviewsList from '../../components/reviews-list';
 import Map from '../../components/map';
 import OffersList from '../../components/offers-list';
 import { Constants } from '../../constants';
 import ReviewForm from '../../components/review-form';
+import FavoriteButtonWrapped from '../../components/favorite-button';
 
 class OfferDetails extends PureComponent {
   static propTypes = {
@@ -29,13 +35,22 @@ class OfferDetails extends PureComponent {
   };
 
   componentDidMount() {
-    const { loadNearbyOffers, loadReviews } = this.props;
+    const { loadNearbyOffers, loadReviews, match } = this.props;
+    this.id = parseInt(match.params.id);
     loadNearbyOffers(this.id);
     loadReviews(this.id);
   }
 
+  componentDidUpdate(nextProps) {
+    const { loadNearbyOffers, loadReviews, match } = this.props;
+    this.id = parseInt(match.params.id);
+    if (nextProps.match !== match) {
+      loadNearbyOffers(this.id);
+      loadReviews(this.id);
+    }
+  }
+
   render() {
-    this.id = parseInt(this.props.match.params.id);
     const {
       offers,
       reviews,
@@ -43,12 +58,15 @@ class OfferDetails extends PureComponent {
       match,
       isAuthorizationRequired
     } = this.props;
+
+    this.id = parseInt(match.params.id);
     const offer = offers.find(offer => offer.id === this.id);
     const {
       isPremium,
       rating,
       price,
       title,
+      isFavorite,
       bedrooms,
       maxAdults,
       host,
@@ -87,19 +105,14 @@ class OfferDetails extends PureComponent {
                 )}
                 <div className='property__name-wrapper'>
                   <h1 className='property__name'>{title}</h1>
-                  <button
-                    className='property__bookmark-button button'
-                    type='button'
-                  >
-                    <svg
-                      className='property__bookmark-icon'
-                      width='31'
-                      height='33'
-                    >
-                      <use xlinkHref='#icon-bookmark' />
-                    </svg>
-                    <span className='visually-hidden'>To bookmarks</span>
-                  </button>
+                  <FavoriteButtonWrapped
+                    id={id}
+                    isFavorite={isFavorite}
+                    prefixClass={'property'}
+                    width={31}
+                    height={33}
+                    match={match}
+                  />
                 </div>
                 <div className='property__rating rating'>
                   <div className='property__stars rating__stars'>
@@ -156,7 +169,7 @@ class OfferDetails extends PureComponent {
                     <p className='property__text'>{description}</p>
                   </div>
                 </div>
-                {reviews.length ? (
+                {reviews.length > 0 && (
                   <section className='property__reviews reviews'>
                     <h2 className='reviews__title'>
                       Reviews &middot;
@@ -167,7 +180,7 @@ class OfferDetails extends PureComponent {
                       <ReviewForm currentOfferId={id} />
                     )}
                   </section>
-                ) : null}
+                )}
               </div>
             </div>
             <section className='property__map map'>
@@ -181,7 +194,6 @@ class OfferDetails extends PureComponent {
               </h2>
               {nearbyOffers.length ? (
                 <OffersList
-                  match={match}
                   offers={nearbyOffers}
                   classModOffers={['near-places__list']}
                   classModPrefix={'near-places'}
@@ -197,11 +209,11 @@ class OfferDetails extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  currentCity: DataSelectors.getCurrentCity(state),
-  offers: DataSelectors.getSortedOffers(state),
-  nearbyOffers: DataSelectors.getNearbyOffers(state),
-  reviews: ReviewsSelectors.getReviews(state),
-  isAuthorizationRequired: UserSelectors.getAuthorizationStatus(state)
+  currentCity: getCurrentCity(state),
+  offers: getSortedOffers(state),
+  nearbyOffers: getNearbyOffers(state),
+  reviews: getReviews(state),
+  isAuthorizationRequired: getAuthorizationStatus(state)
 });
 
 const mapDispatchToProps = dispatch => ({

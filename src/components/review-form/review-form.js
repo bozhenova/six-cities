@@ -1,21 +1,18 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as selectors from '../../redux/reducer/reviews/selectors';
-import {
-  ActionCreators,
-  Operations
-} from '../../redux/reducer/reviews/actions';
+import { ActionCreator, Operations } from '../../redux/reducer/reviews/actions';
 import withReviewForm from '../../hoc/with-review-form';
 import { Constants } from '../../constants';
 
-class ReviewForm extends PureComponent {
+class ReviewForm extends Component {
   form = React.createRef();
 
   handleFormSubmit = e => {
     e.preventDefault();
-    const { postReview, rating, text, currentOfferId } = this.props;
-    postReview(currentOfferId, { rating, text });
+    const { postReview, rating, comment, currentOfferId } = this.props;
+    postReview(currentOfferId, { comment, rating });
   };
 
   handleRatingChange = e => {
@@ -32,7 +29,7 @@ class ReviewForm extends PureComponent {
   }
 
   render() {
-    const { onChangeText, isFormValid, text, isSending } = this.props;
+    const { onChangeText, isFormValid, comment, isSending } = this.props;
     return (
       <form
         className='reviews__form form'
@@ -138,7 +135,7 @@ class ReviewForm extends PureComponent {
           id='review'
           name='review'
           placeholder='Tell how was your stay, what you like and what can be improved'
-          value={text}
+          value={comment}
           onChange={onChangeText}
           minLength={Constants.MIN_TEXT_LENGTH}
           maxLength={Constants.MAX_TEXT_LENGTH}
@@ -174,8 +171,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   postReview: (id, review) => {
     dispatch(Operations.postReview(id, review));
+    dispatch(ActionCreator.lockForm(true));
   },
-  setSendingStatus: () => dispatch(ActionCreators.setSendingStatus(false))
+  setSendingStatus: () => dispatch(ActionCreator.setSendingStatus(false))
 });
 
 const ReviewFormWrapped = withReviewForm(ReviewForm);
