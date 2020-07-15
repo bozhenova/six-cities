@@ -34,3 +34,31 @@ export const Constants = {
   MAX_RATING: 5,
   ERROR_MESSAGE: `Something is wrong. Try later.`
 };
+
+export const KeyCodes = {
+  ENTER: 'Enter',
+  ESCAPE: 'Escape'
+};
+
+export const SortOptions = [
+  {
+    name: `Popular`,
+    value: `popular`,
+    selected: true
+  },
+  {
+    name: `Price: low to high`,
+    value: `to-high`,
+    selected: false
+  },
+  {
+    name: `Price: high to low`,
+    value: `to-low`,
+    selected: false
+  },
+  {
+    name: `Top rated first`,
+    value: `top-rated`,
+    selected: false
+  }
+];
