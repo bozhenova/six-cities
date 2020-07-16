@@ -757,6 +757,7 @@ img {
   font-size: 12px;
   line-height: 1.167;
   font-weight: 700;
+  margin-right: 2px;
 }
 .places__sorting-type {
   position: relative;

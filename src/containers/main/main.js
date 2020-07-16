@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -7,15 +7,15 @@ import {
   getCurrentOfferId,
   getSortedOffers
 } from '../../redux/reducer/data/selectors';
-import HeaderWrapped from '../../components/header';
-import MainEmpty from '../../components/main-empty';
 import Map from '../../components/map';
+import Header from '../../components/header';
+import MainEmpty from '../../components/main-empty';
+import SelectWrapped from '../../components/select';
 import OffersList from '../../components/offers-list';
 import CitiesList from '../../components/cities-list';
-import SelectWrapped from '../../components/select';
 import { ActionCreator as UserActions } from '../../redux/reducer/user/actions';
 
-class Main extends Component {
+class Main extends PureComponent {
   static propTypes = {
     offers: PropTypes.array.isRequired,
     currentCity: PropTypes.string.isRequired,
@@ -27,7 +27,7 @@ class Main extends Component {
 
     return (
       <div className='page page--gray page--main'>
-        <HeaderWrapped />
+        <Header />
         <main className='page__main page__main--index'>
           <h1 className='visually-hidden'>Cities</h1>
           <div className='tabs'>

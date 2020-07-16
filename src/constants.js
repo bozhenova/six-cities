@@ -43,22 +43,22 @@ export const KeyCodes = {
 export const SortOptions = [
   {
     name: `Popular`,
-    value: `popular`,
-    selected: true
+    sortType: `popular`,
+    isSelected: true
   },
   {
     name: `Price: low to high`,
-    value: `to-high`,
-    selected: false
+    sortType: `to-high`,
+    isSelected: false
   },
   {
     name: `Price: high to low`,
-    value: `to-low`,
-    selected: false
+    sortType: `to-low`,
+    isSelected: false
   },
   {
     name: `Top rated first`,
-    value: `top-rated`,
+    sortType: `top-rated`,
     selected: false
   }
 ];
