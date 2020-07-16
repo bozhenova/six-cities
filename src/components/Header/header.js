@@ -1,17 +1,36 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import withLoginData from '../../hoc/with-login-data';
-import { Constants } from '../../constants';
 
-const Header = ({ user, handleSignInClick, handleKeyPress }) => {
+import history from '../../history';
+import { Constants, KeyCodes } from '../../constants';
+import { getLoginData } from '../../redux/reducer/user/selectors';
+import { ActionCreator } from '../../redux/reducer/user/actions';
+
+const Header = () => {
+  const user = useSelector(getLoginData);
+  const dispatch = useDispatch();
+
+  const onSignInClick = () => {
+    dispatch(ActionCreator.requiredAuthorization(true));
+    history.push('/login');
+  };
+
+  const onKeyPress = e => {
+    if (e.key === KeyCodes.ENTER) {
+      dispatch(ActionCreator.requiredAuthorization(true));
+      history.push('/login');
+    }
+  };
+
   const isSignedIn = user.email ? (
     <span className='header__user-name user__name'>{user.email}</span>
   ) : (
     <span
       className='header__login'
-      onClick={handleSignInClick}
+      onClick={onSignInClick}
       tabIndex={0}
-      onKeyPress={handleKeyPress}
+      onKeyPress={onKeyPress}
     >
       Sign in
     </span>
@@ -60,6 +79,5 @@ const Header = ({ user, handleSignInClick, handleKeyPress }) => {
     </header>
   );
 };
-export { Header };
-const HeaderWrapped = withLoginData(Header);
-export default HeaderWrapped;
+
+export default Header;
