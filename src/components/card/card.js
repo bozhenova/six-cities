@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
-import FavoriteButtonWrapped from '../favorite-button';
-import { Constants, KeyCodes } from '../../constants';
+import FavoriteButton from '../favorite-button';
+import { Constants } from '../../constants';
 
 const Card = ({
   offerDetails: {
@@ -32,11 +32,7 @@ const Card = ({
   };
 
   return (
-    <article
-      className={`${mainClassMod} place-card`}
-      onClick={onOfferClick}
-      onMouseEnter={onOfferHover}
-    >
+    <article className={`${mainClassMod} place-card`}>
       {isPremium ? (
         <div className='place-card__mark'>
           <span>Premium</span>
@@ -44,6 +40,8 @@ const Card = ({
       ) : null}
       <div
         className={`${classModPrefix}__image-wrapper place-card__image-wrapper`}
+        onClick={onOfferClick}
+        onMouseEnter={onOfferHover}
       >
         <button type='button'>
           <Link to={`/offer/${id}`}>
@@ -63,7 +61,7 @@ const Card = ({
             <b className='place-card__price-value'>&euro;{price}</b>
             <span className='place-card__price-text'>&#47;&nbsp;night</span>
           </div>
-          <FavoriteButtonWrapped
+          <FavoriteButton
             id={id}
             isFavorite={isFavorite}
             prefixClass={'place-card'}
@@ -82,7 +80,11 @@ const Card = ({
             <span className='visually-hidden'>Rating</span>
           </div>
         </div>
-        <h2 className='place-card__name'>
+        <h2
+          className='place-card__name'
+          onClick={onOfferClick}
+          onMouseEnter={onOfferHover}
+        >
           <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className='place-card__type'>{type}</p>

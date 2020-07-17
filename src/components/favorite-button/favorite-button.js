@@ -1,7 +1,13 @@
 import React from 'react';
-import withFavorite from '../../hoc/with-favorite';
+import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Constants } from '../../constants';
 import history from '../../history';
+import { getCurrentOfferId } from '../../redux/reducer/data/selectors';
+import { Operations as DataOperations } from '../../redux/reducer/data/actions';
+
+import { Operations as FavoritesOperations } from '../../redux/reducer/favorites/actions';
+import { getAuthorizationStatus } from '../../redux/reducer/user/selectors';
 
 const FavoriteButton = ({
   isFavorite,
@@ -9,10 +15,29 @@ const FavoriteButton = ({
   width,
   height,
   id,
-  isAuthRequired,
-  updateFavoriteOffers,
   match
 }) => {
+  const dispatch = useDispatch();
+  const isAuthRequired = useSelector(getAuthorizationStatus);
+  const currentOfferId = useSelector(getCurrentOfferId);
+
+  const updateFavoriteOffers = (id, isFavorite, match) => {
+    dispatch(FavoritesOperations.updateFavorites(id, isFavorite)),
+      updateOffers(match);
+  };
+
+  const updateOffers = match => {
+    switch (match.path) {
+      case '/':
+        dispatch(DataOperations.loadOffers());
+      case '/offer/:id':
+        dispatch(DataOperations.loadNearbyOffers(currentOfferId));
+        dispatch(DataOperations.loadOffers());
+      case '/favorites':
+        dispatch(FavoritesOperations.loadFavorites());
+    }
+  };
+
   const onButtonClick = () => {
     if (isAuthRequired) {
       history.push(Constants.LOGIN_PATH);
@@ -46,6 +71,4 @@ const FavoriteButton = ({
   );
 };
 
-export { FavoriteButton };
-const FavoriteButtonWrapped = withFavorite(FavoriteButton);
-export default FavoriteButtonWrapped;
+export default FavoriteButton;
