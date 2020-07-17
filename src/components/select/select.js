@@ -1,99 +1,90 @@
-import React, { PureComponent, createRef } from 'react';
-import PropTypes from 'prop-types';
-import withSelect from '../../hoc/with-select';
+import React, { useState, useEffect, useRef } from 'react';
+
 import Option from '../option';
+import { KeyCodes, SortOptions } from '../../constants';
 
-export class Select extends PureComponent {
-  static propTypes = {
-    onKeyPressOpenDropdown: PropTypes.func.isRequired,
-    onClickOpenDropdown: PropTypes.func.isRequired,
-    onCloseDropdown: PropTypes.func.isRequired,
-    isOpen: PropTypes.bool.isRequired,
-    selected: PropTypes.string.isRequired,
-    onSelectOption: PropTypes.func.isRequired,
-    options: PropTypes.array.isRequired,
-    selectedName: PropTypes.string.isRequired,
-    onKeyDownCloseDropdown: PropTypes.func.isRequired
-  };
+const Select = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState(`popular`);
+  const [nameSelected, setNameSelected] = useState(`Popular`);
 
-  dropdown = createRef();
-  button = createRef();
+  const dropdownRef = useRef();
+  const buttonRef = useRef();
 
-  componentDidMount() {
-    document.addEventListener(`click`, this.handleOutsideClick);
-  }
+  useEffect(() => {
+    window.addEventListener(`click`, handleOutsideClick);
+    return () => window.removeEventListener(`click`, handleOutsideClick);
+  }, [isOpen]);
 
-  componentWillUnmount() {
-    document.removeEventListener(`click`, this.handleOutsideClick);
-  }
-
-  handleOutsideClick = e => {
-    const { isOpen, onCloseDropdown } = this.props;
-    const dropdown = this.dropdown.current.contains(e.target);
-    const button = this.button.current.contains(e.target);
-
+  const handleOutsideClick = e => {
+    const dropdown = dropdownRef.current.contains(e.target);
+    const button = buttonRef.current.contains(e.target);
     if (isOpen && !dropdown && !button) {
-      onCloseDropdown();
+      setIsOpen(false);
     }
   };
 
-  onFocusButton = () => {
-    this.button.current.focus();
+  const onEnterKeyPress = e => {
+    if (e.key === KeyCodes.ENTER) {
+      setIsOpen(isOpen => !isOpen);
+    }
   };
 
-  render() {
-    const {
-      onKeyPressOpenDropdown,
-      onClickOpenDropdown,
-      isOpen,
-      selected,
-      onSelectOption,
-      options,
-      selectedName,
-      onKeyDownCloseDropdown
-    } = this.props;
-    return (
-      <div className='places__sorting' action='#' method='get'>
-        <span className='places__sorting-caption'>Sort by </span>
-        <span
-          type='button'
-          className='places__sorting-type'
-          onClick={onClickOpenDropdown}
-          onKeyPress={onKeyPressOpenDropdown}
-          tabIndex={0}
-          ref={this.button}
-        >
-          {selectedName}
-          <svg className='places__sorting-arrow' width='7' height='4'>
-            <use xlinkHref='#icon-arrow-select' />
-          </svg>
-        </span>
-        <ul
-          onKeyDown={onKeyDownCloseDropdown}
-          ref={this.dropdown}
-          className={`${
-            isOpen && `places__options--opened`
-          } places__options places__options--custom`}
-          tabIndex={-1}
-        >
-          {options.map(option => {
-            return (
-              <Option
-                onSelectOption={onSelectOption}
-                isSelected={selected === option.isSelected}
-                onFocusButton={this.onFocusButton}
-                sortType={option.sortType}
-                name={option.name}
-                button={this.button}
-                key={option.sortType}
-              />
-            );
-          })}
-        </ul>
-      </div>
-    );
-  }
-}
+  const onEscKeyDown = e => {
+    if (e.key === KeyCodes.ESCAPE) {
+      setIsOpen(false);
+    }
+  };
 
-const SelectWrapped = withSelect(Select);
-export default SelectWrapped;
+  const onButtonClick = () => {
+    setIsOpen(isOpen => !isOpen);
+  };
+
+  const onOptionSelect = (sortType, name) => {
+    setIsOpen(false);
+    setSelected(sortType);
+    setNameSelected(name);
+  };
+
+  return (
+    <div className='places__sorting' action='#' method='get'>
+      <span className='places__sorting-caption'>Sort by </span>
+      <span
+        type='button'
+        className='places__sorting-type'
+        onClick={onButtonClick}
+        onKeyPress={onEnterKeyPress}
+        tabIndex={0}
+        ref={buttonRef}
+      >
+        {nameSelected}
+        <svg className='places__sorting-arrow' width='7' height='4'>
+          <use xlinkHref='#icon-arrow-select' />
+        </svg>
+      </span>
+      <ul
+        onKeyDown={onEscKeyDown}
+        ref={dropdownRef}
+        className={`${
+          isOpen && `places__options--opened`
+        } places__options places__options--custom`}
+        tabIndex={-1}
+      >
+        {SortOptions.map(option => {
+          return (
+            <Option
+              onSelectOption={onOptionSelect}
+              isSelected={selected === option.isSelected}
+              sortType={option.sortType}
+              name={option.name}
+              button={buttonRef}
+              key={option.sortType}
+            />
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
+
+export default Select;

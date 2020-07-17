@@ -1,69 +1,43 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import { ActionCreator } from '../../redux/reducer/data/actions';
 import { KeyCodes } from '../../constants';
 
-export class Option extends PureComponent {
-  static propTypes = {
-    sortType: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    setSortType: PropTypes.func.isRequired,
-    onSelectOption: PropTypes.func.isRequired,
-    onFocusButton: PropTypes.func.isRequired
-  };
+const Option = ({ sortType, name, onSelectOption, isSelected }) => {
+  const dispatch = useDispatch();
 
-  handleOptionClick = () => {
-    const {
-      sortType,
-      name,
-      setSortType,
-      onSelectOption,
-      onFocusButton
-    } = this.props;
-
+  const onOptionClick = () => {
     onSelectOption(sortType, name);
-    setSortType(sortType);
-    onFocusButton();
+    dispatch(ActionCreator.setSortType(sortType));
   };
 
-  handleKeyPressEnter = e => {
-    const {
-      onFocusButton,
-      name,
-      sortType,
-      onSelectOption,
-      setSortType
-    } = this.props;
-
-    if (e.keyCode === KeyCodes.ENTER) {
+  const onEnterKeyPress = e => {
+    if (e.key === KeyCodes.ENTER) {
       onSelectOption(sortType, name);
-      setSortType(sortType);
-      onFocusButton();
+      dispatch(ActionCreator.setSortType(sortType));
     }
   };
 
-  render() {
-    const { isSelected, sortType, name } = this.props;
+  return (
+    <li
+      className={`${isSelected && `places__option--active`} places__option`}
+      onKeyPress={onEnterKeyPress}
+      onClick={onOptionClick}
+      tabIndex={0}
+      data-value={sortType}
+    >
+      {name}
+    </li>
+  );
+};
 
-    return (
-      <li
-        className={`${isSelected && `places__option--active`} places__option`}
-        onKeyPress={this.handleKeyPressEnter}
-        onClick={this.handleOptionClick}
-        tabIndex={0}
-        data-value={sortType}
-      >
-        {name}
-      </li>
-    );
-  }
-}
+Option.propTypes = {
+  sortType: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onSelectOption: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired
+};
 
-const mapDispatchToProps = dispatch => ({
-  setSortType: type => dispatch(ActionCreator.setSortType(type))
-});
-
-export default connect(null, mapDispatchToProps)(Option);
+export default Option;
