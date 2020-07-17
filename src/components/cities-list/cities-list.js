@@ -1,6 +1,5 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 const shortid = require('shortid');
 
 import {
@@ -10,46 +9,29 @@ import {
 import { ActionCreator } from '../../redux/reducer/data/actions';
 import City from '../city';
 
-class CitiesList extends PureComponent {
-  changeCity = city => {
-    this.props.changeCurrentCity(city);
+const CitiesList = () => {
+  const dispatch = useDispatch();
+  const cities = useSelector(getUniqueCities);
+  const currentCity = useSelector(getCurrentCity);
+
+  const changeCity = city => {
+    dispatch(ActionCreator.setCity(city));
   };
 
-  render() {
-    const { cities, currentCity } = this.props;
-    return (
-      <section className='locations container'>
-        <ul className='locations__list tabs__list'>
-          {cities.map(city => (
-            <City
-              key={shortid.generate()}
-              city={city}
-              changeCity={this.changeCity}
-              currentCity={currentCity}
-            />
-          ))}
-        </ul>
-      </section>
-    );
-  }
-}
-
-CitiesList.propTypes = {
-  currentCity: PropTypes.string.isRequired,
-  cities: PropTypes.array,
-  changeCurrentCity: PropTypes.func.isRequired
+  return (
+    <section className='locations container'>
+      <ul className='locations__list tabs__list'>
+        {cities.map(city => (
+          <City
+            key={shortid.generate()}
+            city={city}
+            changeCity={changeCity}
+            currentCity={currentCity}
+          />
+        ))}
+      </ul>
+    </section>
+  );
 };
 
-const mapStateToProps = state => {
-  return {
-    cities: getUniqueCities(state),
-    currentCity: getCurrentCity(state)
-  };
-};
-
-const mapDispatchToProps = dispatch => ({
-  changeCurrentCity: city => dispatch(ActionCreator.setCity(city))
-});
-
-export { CitiesList };
-export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
+export default CitiesList;

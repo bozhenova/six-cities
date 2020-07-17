@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from '../../history';
-import HeaderWrapped from '../../components/header';
+import Header from '../../components/header';
 import { groupFavoritesByCities } from '../../redux/reducer/favorites/selectors';
 import { Operations } from '../../redux/reducer/favorites/actions';
 import { ActionCreator } from '../../redux/reducer/data/actions';
@@ -37,7 +37,7 @@ class Favorites extends PureComponent {
 
     return (
       <div className='page'>
-        <HeaderWrapped />
+        <Header />
         {!cities.length ? (
           <FavoritesEmpty />
         ) : (
@@ -100,7 +100,7 @@ const mapStateToProps = state => {
 
   return {
     cities: Object.keys(favorites),
-    favorites: favorites || {}
+    favorites: favorites
   };
 };
 

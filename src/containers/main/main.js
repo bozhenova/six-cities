@@ -10,7 +10,7 @@ import {
 import Map from '../../components/map';
 import Header from '../../components/header';
 import MainEmpty from '../../components/main-empty';
-import SelectWrapped from '../../components/select';
+import Select from '../../components/select';
 import OffersList from '../../components/offers-list';
 import CitiesList from '../../components/cities-list';
 import { ActionCreator as UserActions } from '../../redux/reducer/user/actions';
@@ -43,7 +43,7 @@ class Main extends PureComponent {
                   <b className='places__found'>
                     {offers.length} places to stay in {currentCity}
                   </b>
-                  <SelectWrapped />
+                  <Select />
                   <OffersList
                     offers={offers}
                     classModOffers={[`cities__places-list`, `tabs__content`]}

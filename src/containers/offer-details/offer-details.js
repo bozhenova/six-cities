@@ -3,26 +3,26 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 const shortid = require('shortid');
 
+import { getReviews } from '../../redux/reducer/reviews/selectors';
+import { getAuthorizationStatus } from '../../redux/reducer/user/selectors';
+import { Operations as ReviewsOperations } from '../../redux/reducer/reviews/actions';
 import {
   getCurrentCity,
   getSortedOffers,
   getNearbyOffers
 } from '../../redux/reducer/data/selectors';
-import { getReviews } from '../../redux/reducer/reviews/selectors';
-import { getAuthorizationStatus } from '../../redux/reducer/user/selectors';
-import { Operations as ReviewsOperations } from '../../redux/reducer/reviews/actions';
 import {
   Operations as DataOperations,
   ActionCreator
 } from '../../redux/reducer/data/actions';
 
-import HeaderWrapped from '../../components/header';
-import ReviewsList from '../../components/reviews-list';
 import Map from '../../components/map';
-import OffersList from '../../components/offers-list';
 import { Constants } from '../../constants';
+import Header from '../../components/header';
 import ReviewForm from '../../components/review-form';
-import FavoriteButtonWrapped from '../../components/favorite-button';
+import OffersList from '../../components/offers-list';
+import ReviewsList from '../../components/reviews-list';
+import FavoriteButton from '../../components/favorite-button';
 
 class OfferDetails extends PureComponent {
   static propTypes = {
@@ -90,7 +90,7 @@ class OfferDetails extends PureComponent {
 
     return (
       <div className='page'>
-        <HeaderWrapped />
+        <Header />
         <main className='page__main page__main--property'>
           <section className='property'>
             <div className='property__gallery-container container'>
@@ -105,7 +105,7 @@ class OfferDetails extends PureComponent {
                 )}
                 <div className='property__name-wrapper'>
                   <h1 className='property__name'>{title}</h1>
-                  <FavoriteButtonWrapped
+                  <FavoriteButton
                     id={id}
                     isFavorite={isFavorite}
                     prefixClass={'property'}
