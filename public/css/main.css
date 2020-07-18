@@ -244,6 +244,12 @@ img {
   padding-left: 58px;
   padding-right: 58px;
 }
+
+.center {
+  text-align: center;
+  margin-top: 10vh;
+}
+
 .button {
   padding: 0;
   background: 0 0;
@@ -1844,13 +1850,13 @@ img {
   top: 31px;
   box-shadow: 70px 0 0 0 #751fff;
 }
+
 .loadingio-spinner-double-ring-06ffj4bbadfx {
   width: 77px;
   height: 77px;
   display: inline-block;
   overflow: hidden;
   background: none;
-  margin: 0 auto;
 }
 .ldio-bq9h1bvhxtj {
   width: 100%;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ErrorIndicator = () => {
-  return <div style={{ textAlign: 'center' }}>Error</div>;
+  return <div className='center'>Something's gone wrong</div>;
 };
 
 export default ErrorIndicator;
