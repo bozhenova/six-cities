@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReviewsList } from './reviews-list';
+import ReviewsList from './reviews-list';
 import renderer from 'react-test-renderer';
 
 describe('Reviews List', () => {

@@ -1,15 +1,23 @@
 import React from 'react';
-import SignIn from './sign-in';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router-dom';
 import renderer from 'react-test-renderer';
-import { HashRouter as Router } from 'react-router-dom';
+
+import SignIn from './sign-in';
+import rootReducer from '../../redux/reducer';
+import history from '../../history';
 
 describe('Sign In', () => {
   it('should render a sign in component', () => {
+    const store = createStore(rootReducer);
     const tree = renderer
       .create(
-        <Router>
-          <SignIn />
-        </Router>
+        <Provider store={store}>
+          <Router history={history}>
+            <SignIn />
+          </Router>
+        </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

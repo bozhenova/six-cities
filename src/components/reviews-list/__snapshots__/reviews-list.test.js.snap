@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reviews List should render a list of reviews 1`] = `
+<ul
+  className="reviews__list"
+/>
+`;

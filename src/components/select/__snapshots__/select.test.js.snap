@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Should render SortingOptions component correctly 1`] = `
-<form
+<div
   action="#"
   className="places__sorting"
   method="get"
@@ -11,35 +11,65 @@ exports[`Should render SortingOptions component correctly 1`] = `
   >
     Sort by 
   </span>
-  <select
+  <span
     className="places__sorting-type"
-    id="places-sorting"
-    onChange={[MockFunction]}
+    onClick={[Function]}
+    onKeyPress={[Function]}
+    tabIndex={0}
+    type="button"
   >
-    <option
-      className="places__option"
-      value="popular"
+    Popular
+    <svg
+      className="places__sorting-arrow"
+      height="4"
+      width="7"
+    >
+      <use
+        xlinkHref="#icon-arrow-select"
+      />
+    </svg>
+  </span>
+  <ul
+    className="false places__options places__options--custom"
+    onKeyDown={[Function]}
+    tabIndex={-1}
+  >
+    <li
+      className="false places__option"
+      data-value="popular"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      tabIndex={0}
     >
       Popular
-    </option>
-    <option
-      className="places__option"
-      value="to-high"
+    </li>
+    <li
+      className="false places__option"
+      data-value="to-high"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      tabIndex={0}
     >
       Price: low to high
-    </option>
-    <option
-      className="places__option"
-      value="to-low"
+    </li>
+    <li
+      className="false places__option"
+      data-value="to-low"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      tabIndex={0}
     >
       Price: high to low
-    </option>
-    <option
-      className="places__option"
-      value="top-rated"
+    </li>
+    <li
+      className="false places__option"
+      data-value="top-rated"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      tabIndex={0}
     >
       Top rated first
-    </option>
-  </select>
-</form>
+    </li>
+  </ul>
+</div>
 `;
