@@ -1,15 +1,23 @@
 import React from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router-dom';
+
+import history from '../../history';
 import Header from './header';
 import renderer from 'react-test-renderer';
-import { HashRouter as Router } from 'react-router-dom';
+import rootReducer from '../../redux/reducer';
 
 describe('Header', () => {
   it('should render a header', () => {
+    const store = createStore(rootReducer);
     const tree = renderer
       .create(
-        <Router>
-          <Header />
-        </Router>
+        <Provider store={store}>
+          <Router history={history}>
+            <Header />
+          </Router>
+        </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

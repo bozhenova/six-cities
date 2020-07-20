@@ -35,6 +35,7 @@ const FavoriteButton = ({
         dispatch(DataOperations.loadOffers());
       case '/favorites':
         dispatch(FavoritesOperations.loadFavorites());
+        dispatch(DataOperations.loadOffers());
     }
   };
 

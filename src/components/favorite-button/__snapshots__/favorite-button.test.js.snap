@@ -10,8 +10,6 @@ exports[`Favorite Button should render a favorite button 1`] = `
   <svg
     aria-hidden="true"
     className="place-card__bookmark-icon"
-    height={19}
-    width={18}
   >
     <use
       xlinkHref="#icon-bookmark"

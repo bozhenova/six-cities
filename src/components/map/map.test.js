@@ -22,11 +22,13 @@ const offers = [
   }
 ];
 
+const currentOfferCoords = [52.369553943508, 4.85309666406198];
+
 describe('Map', () => {
   it('should render a map', () => {
     createMapBlock();
     const map = renderer
-      .create(<Map offers={offers} currentOfferId={42} />)
+      .create(<Map offers={offers} currentOfferCoords={currentOfferCoords} />)
       .toJSON();
     expect(map).toMatchSnapshot();
   });
