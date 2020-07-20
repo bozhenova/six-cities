@@ -1,8 +1,12 @@
 import React from 'react';
-import Card from './card';
 import renderer from 'react-test-renderer';
-import { HashRouter as Router } from 'react-router-dom';
-import Constants from '../../constants';
+import { createStore } from 'redux';
+import { Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import CardWrapped from './card';
+import history from '../../history';
+import rootReducer from '../../redux/reducer';
 
 describe('Card', () => {
   const props = {
@@ -18,15 +22,19 @@ describe('Card', () => {
     },
     selectOffer: jest.fn(),
     classModPrefix: `cities`,
-    mainClassMod: `cities__place-card`
+    mainClassMod: `cities__place-card`,
+    match: {}
   };
 
   it('should render a card', () => {
+    const store = createStore(rootReducer);
     const tree = renderer
       .create(
-        <Router>
-          <Card {...props} />
-        </Router>
+        <Provider store={store}>
+          <Router history={history}>
+            <CardWrapped {...props} />
+          </Router>
+        </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

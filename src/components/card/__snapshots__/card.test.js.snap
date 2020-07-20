@@ -13,18 +13,24 @@ exports[`Card should render a card 1`] = `
   </div>
   <div
     className="cities__image-wrapper place-card__image-wrapper"
+    onClick={[Function]}
     onMouseEnter={[Function]}
   >
     <button
       type="button"
     >
-      <img
-        alt=""
-        className="place-card__image"
-        height="200"
-        src=""
-        width="260"
-      />
+      <a
+        href="/offer/33"
+        onClick={[Function]}
+      >
+        <img
+          alt=""
+          className="place-card__image"
+          height="200"
+          src=""
+          width="260"
+        />
+      </a>
     </button>
   </div>
   <div
@@ -51,6 +57,7 @@ exports[`Card should render a card 1`] = `
       <button
         aria-pressed="false"
         className="place-card__bookmark-button  button"
+        onClick={[Function]}
         type="button"
       >
         <svg
@@ -80,7 +87,7 @@ exports[`Card should render a card 1`] = `
         <span
           style={
             Object {
-              "width": "88%",
+              "width": "1760%",
             }
           }
         />
@@ -93,9 +100,11 @@ exports[`Card should render a card 1`] = `
     </div>
     <h2
       className="place-card__name"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
     >
       <a
-        href="#/offer/33"
+        href="/offer/33"
         onClick={[Function]}
       >
         

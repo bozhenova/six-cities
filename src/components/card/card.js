@@ -95,11 +95,11 @@ const Card = ({
 
 Card.propTypes = {
   offerDetails: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
   classModPrefix: PropTypes.string.isRequired,
   mainClassMod: PropTypes.string.isRequired,
   selectOffer: PropTypes.func
 };
 
-export { Card };
 const CardWrapped = withRouter(Card);
 export default CardWrapped;

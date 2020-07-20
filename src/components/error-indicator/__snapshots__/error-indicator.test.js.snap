@@ -2,12 +2,8 @@
 
 exports[`Error Indicator should render an error message 1`] = `
 <div
-  style={
-    Object {
-      "textAlign": "center",
-    }
-  }
+  className="center"
 >
-  Error
+  Something's gone wrong
 </div>
 `;

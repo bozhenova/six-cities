@@ -4,14 +4,15 @@ exports[`City should render a City component 1`] = `
 <li
   className="locations__item"
 >
-  <button
+  <a
     className="locations__item-link tabs__item tabs__item--active"
     onClick={[Function]}
-    type="button"
+    onKeyPress={[Function]}
+    tabIndex={0}
   >
     <span>
       Amsterdam
     </span>
-  </button>
+  </a>
 </li>
 `;
