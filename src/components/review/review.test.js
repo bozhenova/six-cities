@@ -3,19 +3,19 @@ import Review from './review';
 import renderer from 'react-test-renderer';
 
 const props = {
-  id: `0`,
-  comment: ``,
-  date: ``,
-  machineDate: ``,
-  rating: 0,
-  name: ``,
-  avatar: ``,
-  isPro: false
+  comment: '',
+  date: '',
+  rating: 5,
+  user: {
+    avatarUrl: '',
+    isPro: true,
+    name: ''
+  }
 };
 
-describe('Review', () => {
-  it('should render a review correctly', () => {
-    const review = renderer.create(<Review {...props} />).toJSON();
+describe('Review component renders correctly', () => {
+  it('should render Review', () => {
+    const review = renderer.create(<Review review={props} />).toJSON();
     expect(review).toMatchSnapshot();
   });
 });

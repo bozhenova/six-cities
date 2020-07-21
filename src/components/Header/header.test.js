@@ -8,7 +8,7 @@ import Header from './header';
 import renderer from 'react-test-renderer';
 import rootReducer from '../../redux/reducer';
 
-describe('Header', () => {
+describe('Header component renders correctly', () => {
   it('should render a header', () => {
     const store = createStore(rootReducer);
     const tree = renderer

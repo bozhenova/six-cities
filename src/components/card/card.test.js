@@ -8,7 +8,7 @@ import CardWrapped from './card';
 import history from '../../history';
 import rootReducer from '../../redux/reducer';
 
-describe('Card', () => {
+describe('Card component renders correctly', () => {
   const props = {
     offerDetails: {
       id: 33,

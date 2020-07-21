@@ -8,8 +8,8 @@ import SignIn from './sign-in';
 import rootReducer from '../../redux/reducer';
 import history from '../../history';
 
-describe('Sign In', () => {
-  it('should render a sign in component', () => {
+describe('Sign In component renders correctly', () => {
+  it('should render Sign In', () => {
     const store = createStore(rootReducer);
     const tree = renderer
       .create(

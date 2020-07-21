@@ -1,14 +1,18 @@
 import React from 'react';
-import { OffersList } from './offers-list';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router-dom';
 import renderer from 'react-test-renderer';
-import { HashRouter as Router } from 'react-router-dom';
 
-describe('Offers List', () => {
+import OffersList from './offers-list';
+import rootReducer from '../../redux/reducer';
+import history from '../../history';
+
+describe('Offers List component renders correctly', () => {
   const props = {
     classModOffers: [`cities__places-list`, `tabs__content`],
     classModPrefix: `cities`,
     mainClassMod: `cities__place-card`,
-    setCurrentOffer: jest.fn(),
     offers: [
       {
         id: 42334224,
@@ -38,11 +42,14 @@ describe('Offers List', () => {
   };
 
   it('should render a list of offers', () => {
+    const store = createStore(rootReducer);
     const tree = renderer
       .create(
-        <Router>
-          <OffersList {...props} />
-        </Router>
+        <Provider store={store}>
+          <Router history={history}>
+            <OffersList {...props} />
+          </Router>
+        </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

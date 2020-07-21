@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should render SortingOptions component correctly 1`] = `
+exports[`Select component renders correctly should render Select 1`] = `
 <div
   action="#"
   className="places__sorting"

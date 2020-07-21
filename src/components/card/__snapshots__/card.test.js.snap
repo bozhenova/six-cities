@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Card should render a card 1`] = `
+exports[`Card component renders correctly should render a card 1`] = `
 <article
   className="cities__place-card place-card"
 >

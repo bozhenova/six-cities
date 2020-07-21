@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Offers List should render a list of offers 1`] = `
+exports[`Offers List component renders correctly should render a list of offers 1`] = `
 <div
   className="cities__places-list tabs__content places__list "
 >
@@ -9,18 +9,24 @@ exports[`Offers List should render a list of offers 1`] = `
   >
     <div
       className="cities__image-wrapper place-card__image-wrapper"
+      onClick={[Function]}
       onMouseEnter={[Function]}
     >
       <button
         type="button"
       >
-        <img
-          alt="Wood and stone place"
-          className="place-card__image"
-          height="200"
-          src="img/room.jpg"
-          width="260"
-        />
+        <a
+          href="/offer/42334224"
+          onClick={[Function]}
+        >
+          <img
+            alt="Wood and stone place"
+            className="place-card__image"
+            height="200"
+            src="img/room.jpg"
+            width="260"
+          />
+        </a>
       </button>
     </div>
     <div
@@ -46,7 +52,8 @@ exports[`Offers List should render a list of offers 1`] = `
         </div>
         <button
           aria-pressed="true"
-          className="place-card__bookmark-button place-card__bookmark-button--active button"
+          className="place-card__bookmark-button  button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -76,7 +83,7 @@ exports[`Offers List should render a list of offers 1`] = `
           <span
             style={
               Object {
-                "width": "80%",
+                "width": "1600%",
               }
             }
           />
@@ -89,9 +96,11 @@ exports[`Offers List should render a list of offers 1`] = `
       </div>
       <h2
         className="place-card__name"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
       >
         <a
-          href="#/offer/42334224"
+          href="/offer/42334224"
           onClick={[Function]}
         >
           Wood and stone place
@@ -109,18 +118,24 @@ exports[`Offers List should render a list of offers 1`] = `
   >
     <div
       className="cities__image-wrapper place-card__image-wrapper"
+      onClick={[Function]}
       onMouseEnter={[Function]}
     >
       <button
         type="button"
       >
-        <img
-          alt="Canal View Prinsengracht"
-          className="place-card__image"
-          height="200"
-          src="img/apartment-02.jpg"
-          width="260"
-        />
+        <a
+          href="/offer/4233924"
+          onClick={[Function]}
+        >
+          <img
+            alt="Canal View Prinsengracht"
+            className="place-card__image"
+            height="200"
+            src="img/apartment-02.jpg"
+            width="260"
+          />
+        </a>
       </button>
     </div>
     <div
@@ -147,6 +162,7 @@ exports[`Offers List should render a list of offers 1`] = `
         <button
           aria-pressed="false"
           className="place-card__bookmark-button  button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -176,7 +192,7 @@ exports[`Offers List should render a list of offers 1`] = `
           <span
             style={
               Object {
-                "width": "80%",
+                "width": "1600%",
               }
             }
           />
@@ -189,9 +205,11 @@ exports[`Offers List should render a list of offers 1`] = `
       </div>
       <h2
         className="place-card__name"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
       >
         <a
-          href="#/offer/4233924"
+          href="/offer/4233924"
           onClick={[Function]}
         >
           Canal View Prinsengracht

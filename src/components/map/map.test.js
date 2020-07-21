@@ -24,7 +24,7 @@ const offers = [
 
 const currentOfferCoords = [52.369553943508, 4.85309666406198];
 
-describe('Map', () => {
+describe('Map component renders correctly', () => {
   it('should render a map', () => {
     createMapBlock();
     const map = renderer

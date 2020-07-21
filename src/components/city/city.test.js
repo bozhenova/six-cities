@@ -2,7 +2,7 @@ import React from 'react';
 import City from './city';
 import renderer from 'react-test-renderer';
 
-describe('City', () => {
+describe('City component renders correctly', () => {
   const props = {
     key: 42,
     city: 'Amsterdam',

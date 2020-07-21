@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import { Constants } from '../../constants';
 import history from '../../history';
 import { getCurrentOfferId } from '../../redux/reducer/data/selectors';
@@ -30,12 +31,15 @@ const FavoriteButton = ({
     switch (match.path) {
       case '/':
         dispatch(DataOperations.loadOffers());
+        return;
       case '/offer/:id':
         dispatch(DataOperations.loadNearbyOffers(currentOfferId));
         dispatch(DataOperations.loadOffers());
+        return;
       case '/favorites':
         dispatch(FavoritesOperations.loadFavorites());
         dispatch(DataOperations.loadOffers());
+        return;
     }
   };
 
@@ -70,6 +74,15 @@ const FavoriteButton = ({
       </span>
     </button>
   );
+};
+
+FavoriteButton.propTypes = {
+  id: PropTypes.number.isRequired,
+  match: PropTypes.object.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
+  prefixClass: PropTypes.string.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired
 };
 
 export default FavoriteButton;
