@@ -183,7 +183,7 @@ const ReviewForm = ({ currentOfferId }) => {
 };
 
 ReviewForm.propTypes = {
-  current: PropTypes.string.isRequired
+  currentOfferId: PropTypes.number.isRequired
 };
 
 export default ReviewForm;

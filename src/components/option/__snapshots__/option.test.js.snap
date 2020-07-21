@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Option component renders correctly should render an option 1`] = `
+<li
+  className="false places__option"
+  data-value=""
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  tabIndex={0}
+>
+  
+</li>
+`;
