@@ -12,8 +12,8 @@ import CardWrapped from '../../components/card';
 
 class Favorites extends PureComponent {
   static propTypes = {
-    favorites: PropTypes.object.isRequired,
-    cities: PropTypes.array.isRequired,
+    favorites: PropTypes.object,
+    cities: PropTypes.array,
     loadFavorites: PropTypes.func.isRequired,
     changeCurrentCity: PropTypes.func.isRequired,
     updateFavorites: PropTypes.func.isRequired

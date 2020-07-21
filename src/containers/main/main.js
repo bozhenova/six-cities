@@ -13,7 +13,6 @@ import MainEmpty from '../../components/main-empty';
 import Select from '../../components/select';
 import OffersList from '../../components/offers-list';
 import CitiesList from '../../components/cities-list';
-import { ActionCreator as UserActions } from '../../redux/reducer/user/actions';
 
 class Main extends PureComponent {
   static propTypes = {
@@ -71,8 +70,4 @@ const mapStateToProps = state => ({
   offers: getSortedOffers(state)
 });
 
-const mapDispatchToProps = dispatch => ({
-  requireAuthorization: () => dispatch(UserActions.requiredAuthorization(true))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps)(Main);
