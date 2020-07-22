@@ -1,16 +1,15 @@
 import { ActionTypes as types } from '../../ActionTypes';
 import { Constants } from '../../../constants';
 import { adaptOffers } from '../../../adapter';
-import { Operations as DataOperations } from '../data/actions';
 
 export const ActionCreator = {
   loadFavorites: favorites => ({
     type: types.LOAD_FAVORITES,
     payload: favorites
   }),
-  updateFavorites: offer => ({
+  updateFavorites: offers => ({
     type: types.UPDATE_FAVORITES,
-    payload: offer
+    payload: offers
   })
 };
 
