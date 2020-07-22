@@ -7,17 +7,17 @@ export const ActionCreator = {
     type: types.LOAD_REVIEWS,
     payload: reviews
   }),
-  postReview: review => ({
+  postReview: reviews => ({
     type: types.POST_REVIEW,
-    payload: review
+    payload: reviews
   }),
   setSendingStatus: isSent => ({
-    type: types.SET_SENDING_STATUS,
+    type: types.SET_IS_SENT_STATUS,
     payload: isSent
   }),
-  lockForm: isLock => ({
-    type: types.LOCK_FORM,
-    payload: isLock
+  lockForm: isSending => ({
+    type: types.SET_IS_SENDING_STATUS,
+    payload: isSending
   }),
   setError: error => ({
     type: types.SET_ERROR,
