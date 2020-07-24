@@ -11,22 +11,16 @@ export const ActionCreator = {
   requiredAuthorization: status => ({
     type: types.SET_AUTHORIZATION_REQUIRED,
     payload: status
-  }),
-  setError: error => ({
-    type: types.SET_ERROR,
-    payload: error
   })
 };
 
 export const Operations = {
   loadLoginData: () => (dispatch, _getState, api) => {
-    api.get(Constants.LOGIN_PATH).then(response => {
-      if (response.status === Constants.STATUS_OK) {
+    api.get(Constants.LOGIN_PATH).then(({ status }) => {
+      if (status === Constants.STATUS_OK) {
         const loginData = adaptLoginResponse(response);
         dispatch(ActionCreator.setUserData(loginData));
         dispatch(ActionCreator.requiredAuthorization(false));
-      } else {
-        dispatch(ActionCreator.setError(response.message));
       }
     });
   },

@@ -1,7 +1,5 @@
 import axios from 'axios';
 import { Constants } from '../constants';
-import { ActionCreators } from '../redux/reducer/user/actions';
-import history from '../history';
 
 const configureAPI = onLoginFail => {
   const api = axios.create({
@@ -12,13 +10,11 @@ const configureAPI = onLoginFail => {
 
   const onSuccess = response => response.data;
 
-  const onFail = err => {
-    if (err.response.status === Constants.ACCESS_DENIED) {
+  const onFail = ({ response }) => {
+    if (response.status === Constants.ACCESS_DENIED) {
       onLoginFail();
-      // history.push(`/login`);
-      return false;
+      return response;
     }
-    return err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);

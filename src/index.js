@@ -5,8 +5,8 @@ import { createStore, applyMiddleware } from 'redux';
 import { Router } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import { compose } from 'recompose';
-import history from './history';
 
+import history from './history';
 import App from './components/app';
 import configureAPI from './services/api';
 import rootReducer from './redux/reducer';

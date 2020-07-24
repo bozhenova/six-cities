@@ -675,6 +675,7 @@ img {
   letter-spacing: 0.9px;
 }
 .locations__item-link {
+  cursor: pointer;
   display: block;
   padding: 9px 21px 6px 11px;
   font-size: 19px;

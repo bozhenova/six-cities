@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import history from '../../history';
 import { Constants, KeyCodes } from '../../constants';
 import { getLoginData } from '../../redux/reducer/user/selectors';
 import { ActionCreator } from '../../redux/reducer/user/actions';
@@ -10,10 +9,11 @@ import { ActionCreator } from '../../redux/reducer/user/actions';
 const Header = () => {
   const user = useSelector(getLoginData);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onSignInClick = () => {
     dispatch(ActionCreator.requiredAuthorization(true));
-    history.push('/login');
+    history.push(Constants.LOGIN_PATH);
   };
 
   const onKeyPress = e => {

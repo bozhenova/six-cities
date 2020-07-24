@@ -1,6 +1,6 @@
 import { ActionTypes as types } from '../../ActionTypes';
 import { Constants } from '../../../constants';
-import { adaptOffers } from '../../../adapter';
+import { adaptOffers, adaptOffer } from '../../../adapter';
 
 export const ActionCreator = {
   loadFavorites: favorites => ({
@@ -23,8 +23,7 @@ export const Operations = {
   updateFavorites: (id, isFavorite) => (dispatch, _getState, api) => {
     return api
       .post(`${Constants.FAVORITE_PATH}/${id}/${+!isFavorite}`)
-      .then(data => {
-        dispatch(ActionCreator.updateFavorites(data));
-      });
+      .then(response => adaptOffer(response))
+      .then(data => dispatch(ActionCreator.updateFavorites(data)));
   }
 };

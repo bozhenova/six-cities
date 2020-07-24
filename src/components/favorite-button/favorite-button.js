@@ -31,9 +31,12 @@ const FavoriteButton = ({
     switch (match.path) {
       case '/':
         dispatch(DataOperations.loadOffers());
+        dispatch(FavoritesOperations.loadFavorites());
+
         return;
       case '/offer/:id':
         dispatch(DataOperations.loadNearbyOffers(currentOfferId));
+        dispatch(FavoritesOperations.loadFavorites());
         dispatch(DataOperations.loadOffers());
         return;
       case '/favorites':

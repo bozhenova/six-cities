@@ -4,11 +4,9 @@ export const parseDate = date => {
 };
 
 export const updateItemsList = (items, newItem) => {
-  return items.length
-    ? items.map(item => {
-        return item.id === newItem.id ? newItem : item;
-      })
-    : false;
+  return items.map(item => {
+    return item.id === newItem.id ? newItem : item;
+  });
 };
 
 export const findItemById = (id, items) => items.find(item => item.id === id);

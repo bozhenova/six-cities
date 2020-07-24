@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import history from '../../history';
 import Header from '../../components/header';
+import Footer from '../../components/footer';
 import { groupFavoritesByCities } from '../../redux/reducer/favorites/selectors';
 import { Operations } from '../../redux/reducer/favorites/actions';
 import { ActionCreator } from '../../redux/reducer/data/actions';
@@ -79,17 +80,7 @@ class Favorites extends PureComponent {
             </div>
           </main>
         )}
-        <footer className='footer container'>
-          <Link className='footer__logo-link' to={'/'}>
-            <img
-              className='footer__logo'
-              src='img/logo.svg'
-              alt='6 cities logo'
-              width='64'
-              height='33'
-            />
-          </Link>
-        </footer>
+        <Footer />
       </div>
     );
   }
