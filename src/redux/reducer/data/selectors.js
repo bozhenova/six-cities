@@ -33,6 +33,11 @@ export const getSortedOffers = createSelector(
   }
 );
 
+export const getOfferById = (state, id) => {
+  const offers = getSortedOffers(state);
+  return offers && offers.find(offer => offer.id == id);
+};
+
 export const getCurrentOfferCoords = createSelector(
   getCurrentOfferId,
   getSortedOffers,

@@ -1,6 +1,7 @@
 import { ActionTypes as types } from '../../ActionTypes';
 import { Constants } from '../../../constants';
 import { adaptOffers } from '../../../adapter';
+import { getOfferById } from './selectors';
 
 export const ActionCreator = {
   setCity: city => ({
@@ -31,6 +32,14 @@ export const Operations = {
       .get(Constants.HOTEL_PATH)
       .then(response => adaptOffers(response))
       .then(data => dispatch(ActionCreator.loadOffers(data)));
+  },
+  loadOffer: id => (dispatch, _getState) => {
+    const state = _getState();
+    const offer = getOfferById(state, id);
+    if (!offer) {
+      return dispatch(Operations.loadOffers());
+    }
+    return Promise.resolve(offer);
   },
   loadNearbyOffers: id => (dispatch, _getState, api) => {
     return api

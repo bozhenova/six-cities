@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import {
   getCurrentCity,
-  getCurrentOfferId,
   getSortedOffers
 } from '../../redux/reducer/data/selectors';
 import Map from '../../components/map';
@@ -17,8 +16,7 @@ import CitiesList from '../../components/cities-list';
 class Main extends PureComponent {
   static propTypes = {
     offers: PropTypes.array.isRequired,
-    currentCity: PropTypes.string.isRequired,
-    currentOfferId: PropTypes.number
+    currentCity: PropTypes.string.isRequired
   };
 
   render() {
@@ -66,7 +64,6 @@ class Main extends PureComponent {
 
 const mapStateToProps = state => ({
   currentCity: getCurrentCity(state),
-  currentOfferId: getCurrentOfferId(state),
   offers: getSortedOffers(state)
 });
 

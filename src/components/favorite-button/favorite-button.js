@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import { Constants } from '../../constants';
 import history from '../../history';
-import { getCurrentOfferId } from '../../redux/reducer/data/selectors';
 import { Operations as DataOperations } from '../../redux/reducer/data/actions';
 
 import { Operations as FavoritesOperations } from '../../redux/reducer/favorites/actions';
@@ -20,28 +19,23 @@ const FavoriteButton = ({
 }) => {
   const dispatch = useDispatch();
   const isAuthRequired = useSelector(getAuthorizationStatus);
-  const currentOfferId = useSelector(getCurrentOfferId);
 
   const updateFavoriteOffers = (id, isFavorite, match) => {
-    dispatch(FavoritesOperations.updateFavorites(id, isFavorite)),
-      updateOffers(match);
+    dispatch(FavoritesOperations.updateFavorites(id, isFavorite));
+    updateOffers(match, id);
   };
 
-  const updateOffers = match => {
+  const updateOffers = (match, id) => {
     switch (match.path) {
       case '/':
         dispatch(DataOperations.loadOffers());
-        dispatch(FavoritesOperations.loadFavorites());
-
         return;
       case '/offer/:id':
-        dispatch(DataOperations.loadNearbyOffers(currentOfferId));
-        dispatch(FavoritesOperations.loadFavorites());
+        dispatch(DataOperations.loadNearbyOffers(id));
         dispatch(DataOperations.loadOffers());
         return;
       case '/favorites':
         dispatch(FavoritesOperations.loadFavorites());
-        dispatch(DataOperations.loadOffers());
         return;
     }
   };

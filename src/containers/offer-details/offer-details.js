@@ -7,14 +7,10 @@ import { getReviews } from '../../redux/reducer/reviews/selectors';
 import { getAuthorizationStatus } from '../../redux/reducer/user/selectors';
 import { Operations as ReviewsOperations } from '../../redux/reducer/reviews/actions';
 import {
-  getCurrentCity,
-  getSortedOffers,
-  getNearbyOffers
+  getNearbyOffers,
+  getOfferById
 } from '../../redux/reducer/data/selectors';
-import {
-  Operations as DataOperations,
-  ActionCreator
-} from '../../redux/reducer/data/actions';
+import { Operations as DataOperations } from '../../redux/reducer/data/actions';
 
 import Map from '../../components/map';
 import { Constants } from '../../constants';
@@ -26,41 +22,43 @@ import FavoriteButton from '../../components/favorite-button';
 
 class OfferDetails extends PureComponent {
   static propTypes = {
-    offers: PropTypes.array.isRequired,
+    offer: PropTypes.object.isRequired,
     nearbyOffers: PropTypes.array.isRequired,
     reviews: PropTypes.any,
     loadReviews: PropTypes.func.isRequired,
+    loadOffer: PropTypes.func.isRequired,
     loadNearbyOffers: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired
   };
 
-  componentDidMount() {
-    const { loadNearbyOffers, loadReviews, match } = this.props;
-    this.id = parseInt(match.params.id);
-    loadNearbyOffers(this.id);
-    loadReviews(this.id);
+  constructor(props) {
+    super(props);
+    const { loadNearbyOffers, loadReviews, match, loadOffer } = this.props;
+    const id = match.params.id;
+    loadOffer(id);
+    loadNearbyOffers(id);
+    loadReviews(id);
   }
 
   componentDidUpdate(nextProps) {
-    const { loadNearbyOffers, loadReviews, match } = this.props;
-    this.id = parseInt(match.params.id);
+    const { loadNearbyOffers, loadReviews, match, loadOffer } = this.props;
+    const id = match.params.id;
     if (nextProps.match !== match) {
-      loadNearbyOffers(this.id);
-      loadReviews(this.id);
+      loadOffer(id);
+      loadNearbyOffers(id);
+      loadReviews(id);
     }
   }
 
   render() {
     const {
-      offers,
       reviews,
       nearbyOffers,
       match,
+      offer,
       isAuthorizationRequired
     } = this.props;
 
-    this.id = parseInt(match.params.id);
-    const offer = offers.find(offer => offer.id === this.id);
     const {
       isPremium,
       rating,
@@ -208,17 +206,19 @@ class OfferDetails extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
-  currentCity: getCurrentCity(state),
-  offers: getSortedOffers(state),
-  nearbyOffers: getNearbyOffers(state),
-  reviews: getReviews(state),
-  isAuthorizationRequired: getAuthorizationStatus(state)
-});
+const mapStateToProps = (state, { match }) => {
+  const id = match.params.id;
+  return {
+    offer: getOfferById(state, id),
+    nearbyOffers: getNearbyOffers(state),
+    reviews: getReviews(state),
+    isAuthorizationRequired: getAuthorizationStatus(state)
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentOffer: id => dispatch(ActionCreator.setCurrentOffer(id)),
   loadReviews: id => dispatch(ReviewsOperations.loadReviews(id)),
+  loadOffer: id => dispatch(DataOperations.loadOffer(id)),
   loadNearbyOffers: id => dispatch(DataOperations.loadNearbyOffers(id))
 });
 
