@@ -978,7 +978,6 @@ img {
 }
 .property__container {
   position: relative;
-  overflow-x: hidden;
 }
 .property__wrapper {
   display: -webkit-box;

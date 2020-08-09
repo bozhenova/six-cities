@@ -31,7 +31,6 @@ const initApp = () => {
   );
 
   store.dispatch(DataOperations.loadOffers());
-  store.dispatch(UserOperations.loadLoginData());
 
   ReactDOM.render(
     <Provider store={store}>

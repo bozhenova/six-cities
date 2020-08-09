@@ -25,6 +25,7 @@ const Card = ({
       selectOffer(id);
     }
   };
+
   const onOfferClick = () => {
     if (match.path === '/offer/:id') {
       selectOffer(id);

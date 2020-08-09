@@ -31,8 +31,7 @@ class OfferDetails extends PureComponent {
     match: PropTypes.object.isRequired
   };
 
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     const { loadNearbyOffers, loadReviews, match, loadOffer } = this.props;
     const id = match.params.id;
     loadOffer(id);
@@ -40,10 +39,10 @@ class OfferDetails extends PureComponent {
     loadReviews(id);
   }
 
-  componentDidUpdate(nextProps) {
+  componentDidUpdate(prevProps) {
     const { loadNearbyOffers, loadReviews, match, loadOffer } = this.props;
     const id = match.params.id;
-    if (nextProps.match !== match) {
+    if (prevProps.match !== match) {
       loadOffer(id);
       loadNearbyOffers(id);
       loadReviews(id);

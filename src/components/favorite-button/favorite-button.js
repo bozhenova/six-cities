@@ -25,7 +25,8 @@ const FavoriteButton = ({
     updateOffers(match, id);
   };
 
-  const updateOffers = (match, id) => {
+  const updateOffers = match => {
+    const id = match.params.id;
     switch (match.path) {
       case '/':
         dispatch(DataOperations.loadOffers());
