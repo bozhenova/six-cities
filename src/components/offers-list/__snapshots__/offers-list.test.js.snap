@@ -16,7 +16,7 @@ exports[`Offers List component renders correctly should render a list of offers 
         type="button"
       >
         <a
-          href="/offer/42334224"
+          href="#/offer/42334224"
           onClick={[Function]}
         >
           <img
@@ -100,7 +100,7 @@ exports[`Offers List component renders correctly should render a list of offers 
         onMouseEnter={[Function]}
       >
         <a
-          href="/offer/42334224"
+          href="#/offer/42334224"
           onClick={[Function]}
         >
           Wood and stone place
@@ -125,7 +125,7 @@ exports[`Offers List component renders correctly should render a list of offers 
         type="button"
       >
         <a
-          href="/offer/4233924"
+          href="#/offer/4233924"
           onClick={[Function]}
         >
           <img
@@ -209,7 +209,7 @@ exports[`Offers List component renders correctly should render a list of offers 
         onMouseEnter={[Function]}
       >
         <a
-          href="/offer/4233924"
+          href="#/offer/4233924"
           onClick={[Function]}
         >
           Canal View Prinsengracht

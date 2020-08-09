@@ -18,7 +18,7 @@ exports[`Sign In component renders correctly should render Sign In 1`] = `
         >
           <a
             className="header__logo-link header__logo-link--active"
-            href="/"
+            href="#/"
             onClick={[Function]}
           >
             <img
@@ -41,7 +41,7 @@ exports[`Sign In component renders correctly should render Sign In 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="/login"
+                href="#/login"
                 onClick={[Function]}
               >
                 <div

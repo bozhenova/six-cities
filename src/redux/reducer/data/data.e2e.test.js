@@ -12,9 +12,9 @@ describe('Reducer works correctly', () => {
   it('Should return initial state by default', () => {
     expect(reducer(undefined, {})).toEqual({
       currentCity: '',
-      offers: [],
       nearbyOffers: [],
       currentOfferId: null,
+      offers: [],
       sortType: 'popular'
     });
   });

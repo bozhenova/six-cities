@@ -20,7 +20,7 @@ exports[`Card component renders correctly should render a card 1`] = `
       type="button"
     >
       <a
-        href="/offer/33"
+        href="#/offer/33"
         onClick={[Function]}
       >
         <img
@@ -104,7 +104,7 @@ exports[`Card component renders correctly should render a card 1`] = `
       onMouseEnter={[Function]}
     >
       <a
-        href="/offer/33"
+        href="#/offer/33"
         onClick={[Function]}
       >
         

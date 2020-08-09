@@ -5,7 +5,7 @@ import { Operations } from './actions';
 import { ActionTypes as types } from '../../ActionTypes';
 import { Constants } from '../../../constants';
 import { offersFromRequest } from '../../../mocks';
-import { adaptOffers } from '../../../adapter';
+import { adaptOffers, adaptOffer } from '../../../adapter';
 
 describe('Reducer works correctly', () => {
   it('Should make a correct API call to /hotels', () => {
@@ -36,13 +36,13 @@ describe('Reducer works correctly', () => {
 
     apiMock
       .onPost(`${Constants.FAVORITE_PATH}/${id}/${+!isFavorite}`)
-      .reply(Constants.STATUS_OK, offersFromRequest);
+      .reply(Constants.STATUS_OK, offersFromRequest[0]);
 
     return offersUpdate(dispatch, jest.fn(), api).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
         type: types.UPDATE_FAVORITES,
-        payload: offersFromRequest
+        payload: adaptOffer(offersFromRequest[0])
       });
     });
   });
