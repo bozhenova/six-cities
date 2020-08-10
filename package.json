@@ -43,7 +43,7 @@
     "eslint": "eslint --ext .jsx --ext .js src/",
     "test": "npm run eslint && jest",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open --hot --history-api-fallback"
+    "start": "webpack-dev-server --mode development --open --hot --history-api-fallback",
   },
   "jest": {
     "setupFiles": [

@@ -151,7 +151,7 @@ class OfferDetails extends PureComponent {
                     <div className='property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper'>
                       <img
                         className='property__avatar user__avatar'
-                        src={`${host.avatar}`}
+                        src={`/${host.avatar}`}
                         width='74'
                         height='74'
                         alt='Host avatar'
