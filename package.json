@@ -9,6 +9,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^7.2.0",
     "eslint-plugin-react": "^7.20.0",
+    "gh-pages": "^3.1.0",
     "leaflet": "1.6.0",
     "moment": "^2.27.0",
     "prop-types": "15.7.2",
@@ -42,7 +43,7 @@
     "eslint": "eslint --ext .jsx --ext .js src/",
     "test": "npm run eslint && jest",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open --hot --history-api-fallback"
+    "start": "webpack-dev-server --mode development --open --hot --history-api-fallback",
   },
   "jest": {
     "setupFiles": [
@@ -68,5 +69,5 @@
   "bugs": {
     "url": "https://github.com/bozhenova/six-cities/issues"
   },
-  "homepage": "https://github.com/bozhenova/six-cities"
+  "homepage": "https://bozhenova.github.io/six-cities"
 }
