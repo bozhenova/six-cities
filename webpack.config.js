@@ -1,4 +1,6 @@
 const path = require(`path`);
+const isProd = process.env.NODE_ENV === 'production';
+const isDev = !isProd;
 
 module.exports = {
   entry: `./src/index.js`,
@@ -25,5 +27,5 @@ module.exports = {
       }
     ]
   },
-  devtool: `source-map`
+    devtool: isDev ? 'source-map' : false,
 };

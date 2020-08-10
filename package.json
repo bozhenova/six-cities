@@ -29,6 +29,7 @@
     "axios-mock-adapter": "^1.18.1",
     "babel-jest": "26.0.1",
     "babel-loader": "8.1.0",
+    "cross-env": "^7.0.2",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.2",
     "jest": "26.0.1",
@@ -42,8 +43,8 @@
   "scripts": {
     "eslint": "eslint --ext .jsx --ext .js src/",
     "test": "npm run eslint && jest",
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open --hot --history-api-fallback",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open --hot --history-api-fallback"
   },
   "jest": {
     "setupFiles": [
