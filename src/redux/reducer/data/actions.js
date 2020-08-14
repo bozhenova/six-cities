@@ -33,14 +33,6 @@ export const Operations = {
       .then(response => adaptOffers(response))
       .then(data => dispatch(ActionCreator.loadOffers(data)));
   },
-  loadOffer: id => (dispatch, _getState) => {
-    const state = _getState();
-    const offer = getOfferById(state, id);
-    if (!offer) {
-      return dispatch(Operations.loadOffers());
-    }
-    return Promise.resolve(offer);
-  },
   loadNearbyOffers: id => (dispatch, _getState, api) => {
     return api
       .get(`${Constants.HOTEL_PATH}/${id}${Constants.NEARBY_PATH}`)

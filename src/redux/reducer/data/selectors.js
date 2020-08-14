@@ -34,15 +34,25 @@ export const getSortedOffers = createSelector(
 );
 
 export const getOfferById = (state, id) => {
-  const offers = getSortedOffers(state);
-  return offers && offers.find(offer => offer.id == id);
+  const offers = getOffers(state);
+  return offers.find(offer => offer.id == id);
 };
+
+export const getOffer = createSelector(
+  getOffers,
+  getOfferById,
+  (offers, currentOffer) => {
+    return offers.find(offer => offer.id === currentOffer.id);
+  }
+);
 
 export const getCurrentOfferCoords = createSelector(
   getCurrentOfferId,
-  getSortedOffers,
+  getOffers,
   (currentOfferId, offers) => {
-    const currentOffer = findItemById(currentOfferId, offers);
-    return currentOffer ? currentOffer.place.coords : [0, 0];
+    const currentOffer = findItemById(currentOfferId, offers) || {};
+    return Object.keys(currentOffer).length
+      ? currentOffer.place.coords
+      : [0, 0];
   }
 );

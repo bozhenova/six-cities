@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import { connect } from 'react-redux';
-import * as selectors from '../../redux/reducer/data/selectors';
+import { getCurrentOfferCoords } from '../../redux/reducer/data/selectors';
 
 const MapConfig = {
   ID: `map`,
@@ -90,7 +90,7 @@ class Map extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  currentOfferCoords: selectors.getCurrentOfferCoords(state)
+  currentOfferCoords: getCurrentOfferCoords(state)
 });
 
 export { Map };
