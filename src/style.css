@@ -153,36 +153,36 @@ template {
   font-family: rubik;
   font-style: normal;
   font-weight: 300;
-  src: url(../fonts/rubik-light.woff2) format('woff2'),
-    url(../fonts/rubik-light.woff) format('woff'),
-    url(../fonts/rubik-light.ttf) format('truetype');
+  src: url(/fonts/rubik-light.woff2) format('woff2'),
+    url(/fonts/rubik-light.woff) format('woff'),
+    url(/fonts/rubik-light.ttf) format('truetype');
   font-display: swap;
 }
 @font-face {
   font-family: rubik;
   font-style: normal;
   font-weight: 400;
-  src: url(../fonts/rubik-regular.woff2) format('woff2'),
-    url(../fonts/rubik-regular.woff) format('woff'),
-    url(../fonts/rubik-regular.ttf) format('truetype');
+  src: url(/fonts/rubik-regular.woff2) format('woff2'),
+    url(/fonts/rubik-regular.woff) format('woff'),
+    url(/fonts/rubik-regular.ttf) format('truetype');
   font-display: swap;
 }
 @font-face {
   font-family: rubik;
   font-style: normal;
   font-weight: 500;
-  src: url(../fonts/rubik-medium.woff2) format('woff2'),
-    url(../fonts/rubik-medium.woff) format('woff'),
-    url(../fonts/rubik-medium.ttf) format('truetype');
+  src: url(/fonts/rubik-medium.woff2) format('woff2'),
+    url(/fonts/rubik-medium.woff) format('woff'),
+    url(/fonts/rubik-medium.ttf) format('truetype');
   font-display: swap;
 }
 @font-face {
   font-family: rubik;
   font-style: normal;
   font-weight: 700;
-  src: url(../fonts/rubik-bold.woff2) format('woff2'),
-    url(../fonts/rubik-bold.woff) format('woff'),
-    url(../fonts/rubik-bold.ttf) format('truetype');
+  src: url(/fonts/rubik-bold.woff2) format('woff2'),
+    url(/fonts/rubik-bold.woff) format('woff'),
+    url(/fonts/rubik-bold.ttf) format('truetype');
   font-display: swap;
 }
 body,
@@ -455,7 +455,7 @@ img {
   padding-top: 2px;
 }
 .user__avatar-wrapper {
-  background-image: url(../img/avatar.svg);
+  background-image: url(/img/avatar.svg);
   background-size: 100%;
   background-repeat: no-repeat;
 }
@@ -471,7 +471,7 @@ img {
   content: '';
   display: inline-block;
   height: 100%;
-  background: url(../img/stars.svg) transparent no-repeat center;
+  background: url(/img/stars.svg) transparent no-repeat center;
 }
 .rating__stars span {
   position: absolute;
@@ -485,7 +485,7 @@ img {
   content: '';
   display: inline-block;
   height: 100%;
-  background: url(../img/stars-active.svg) transparent no-repeat center;
+  background: url(/img/stars-active.svg) transparent no-repeat center;
 }
 .cities {
   display: -webkit-box;
@@ -605,7 +605,7 @@ img {
   margin-left: auto;
   padding-top: 62px;
   text-align: center;
-  background-image: url(../img/ico-no-results.svg);
+  background-image: url(/img/ico-no-results.svg);
   background-size: 45px 47px;
   background-position: center top;
   background-repeat: no-repeat;
@@ -932,7 +932,7 @@ img {
   left: 0;
   width: 34px;
   height: 100%;
-  background-image: url(../img/triangle.svg);
+  background-image: url(/img/triangle.svg);
   background-repeat: no-repeat;
   background-size: 34px 452px;
   -webkit-transform: rotate(180deg);
@@ -945,7 +945,7 @@ img {
   right: 0;
   width: 34px;
   height: 100%;
-  background-image: url(../img/triangle.svg);
+  background-image: url(/img/triangle.svg);
   background-repeat: no-repeat;
   background-size: 34px 452px;
 }
@@ -1096,15 +1096,15 @@ img {
   background-repeat: no-repeat;
 }
 .property__feature--entire {
-  background-image: url(../img/ico-place.svg);
+  background-image: url(/img/ico-place.svg);
   background-size: 13px 16px;
 }
 .property__feature--bedrooms {
-  background-image: url(../img/ico-bedrooms.svg);
+  background-image: url(/img/ico-bedrooms.svg);
   background-size: 14px 18px;
 }
 .property__feature--adults {
-  background-image: url(../img/ico-adults.svg);
+  background-image: url(/img/ico-adults.svg);
   background-size: 13px 12px;
   background-position: left 3px;
 }
@@ -1267,7 +1267,7 @@ img {
   height: 33px;
   border-radius: 50%;
   background-color: #ff9000;
-  background-image: url(../img/star-white.svg);
+  background-image: url(/img/star-white.svg);
   background-size: 20px 19px;
   background-position: center 6px;
   background-repeat: no-repeat;
@@ -1442,7 +1442,7 @@ img {
 }
 .reviews__star {
   padding-left: 15px;
-  background-image: url(../img/star-active.svg);
+  background-image: url(/img/star-active.svg);
   background-size: 12px 11px;
   background-repeat: no-repeat;
 }
@@ -1720,7 +1720,7 @@ img {
   margin-left: auto;
   padding-top: 94px;
   text-align: center;
-  background-image: url(../img/ico-saved.svg);
+  background-image: url(/img/ico-saved.svg);
   background-size: 60px 73px;
   background-position: center top;
   background-repeat: no-repeat;
