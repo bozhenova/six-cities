@@ -281,7 +281,7 @@ img {
   margin-left: auto;
   margin-right: auto;
   background-image: linear-gradient(to right, #f5f5f5 509px, transparent 509px),
-    url(../img/amsterdam.jpg);
+    url(img/amsterdam.jpg);
   background-position: top left, right top;
   height: 100vh;
   background-size: auto, auto 100%;
@@ -297,7 +297,7 @@ img {
         #f5f5f5 509px,
         transparent 509px
       ),
-      url(../img/amsterdam@2x.jpg);
+      url(img/amsterdam@2x.jpg);
   }
 }
 @media (max-height: 720px) {
@@ -549,7 +549,7 @@ img {
   margin-bottom: 24px;
 }
 .page__main--index-empty .cities__right-section {
-  background-image: url(../img/no-places@2x.png);
+  background-image: url(img/no-places@2x.png);
   background-size: auto 119%;
   background-repeat: no-repeat;
   background-position: right 100%;
@@ -558,7 +558,7 @@ img {
   (min-resolution: 144dpi),
   (min-resolution: 1.5dppx) {
   .page__main--index-empty .cities__right-section {
-    background-image: url(../img/no-places@2x.png);
+    background-image: url(img/no-places@2x.png);
   }
 }
 @media (max-height: 780px) {
@@ -587,7 +587,7 @@ img {
   (min-resolution: 144dpi),
   (min-resolution: 1.5dppx) {
   .cities__map {
-    background-image: url(../img/map@2x.jpg);
+    background-image: url(img/map@2x.jpg);
     background-size: 682px 794px;
   }
 }
@@ -1302,7 +1302,7 @@ img {
   width: 100%;
   height: 579px;
   margin-bottom: 50px;
-  background-image: url(../img/map-big.jpg);
+  background-image: url(img/map-big.jpg);
   background-repeat: no-repeat;
   background-size: 1144px auto;
   background-position: center top;
@@ -1311,7 +1311,7 @@ img {
   (min-resolution: 144dpi),
   (min-resolution: 1.5dppx) {
   .property__map {
-    background-image: url(../img/map-big@2x.jpg);
+    background-image: url(img/map-big@2x.jpg);
     background-size: 1144px auto;
   }
 }
