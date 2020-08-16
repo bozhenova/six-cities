@@ -12,7 +12,6 @@ import configureAPI from './services/api';
 import rootReducer from './redux/reducer';
 import ErrorBoundary from './components/error-boundary';
 import { ActionCreator } from './redux/reducer/user/actions';
-import { Operations as DataOperations } from './redux/reducer/data/actions';
 import './style.css';
 
 const initApp = () => {
@@ -27,8 +26,6 @@ const initApp = () => {
         window.__REDUX_DEVTOOLS_EXTENSION__()
     )
   );
-
-  store.dispatch(DataOperations.loadOffers());
 
   ReactDOM.render(
     <Provider store={store}>

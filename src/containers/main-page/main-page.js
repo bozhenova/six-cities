@@ -6,6 +6,7 @@ import {
   getCurrentCity,
   getSortedOffers
 } from '../../redux/reducer/data/selectors';
+import { Operations } from '../../redux/reducer/data/actions';
 import Map from '../../components/map';
 import Header from '../../components/header';
 import MainEmpty from '../../components/main-empty';
@@ -18,6 +19,10 @@ class Main extends PureComponent {
     offers: PropTypes.array.isRequired,
     currentCity: PropTypes.string.isRequired
   };
+
+  componentDidMount() {
+    this.props.loadOffers();
+  }
 
   render() {
     const { currentCity, offers } = this.props;
@@ -67,4 +72,8 @@ const mapStateToProps = state => ({
   offers: getSortedOffers(state)
 });
 
-export default connect(mapStateToProps)(Main);
+const mapDispatchToProps = dispatch => ({
+  loadOffers: () => dispatch(Operations.loadOffers())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
