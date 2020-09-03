@@ -5,10 +5,10 @@ import { Operations } from './actions';
 import { ActionTypes as types } from '../../ActionTypes';
 import { Constants } from '../../../constants';
 import { offersFromRequest } from '../../../mocks';
-import { adaptOffers, adaptOffer } from '../../../adapter';
+import { adaptOffers } from '../../../adapter';
 
 describe('Reducer works correctly', () => {
-  it('Should make a correct API call to /hotels', () => {
+  it('Should make a correct API call to /favorite', () => {
     const dispatch = jest.fn();
     const api = configureAPI(dispatch);
     const apiMock = new MockAdapter(api);
@@ -26,7 +26,7 @@ describe('Reducer works correctly', () => {
       });
     });
   });
-  it('Should make a correct API call POST to /hotels/id/1', () => {
+  it('Should make a correct API call POST to /hotels/id', () => {
     const dispatch = jest.fn();
     const api = configureAPI(dispatch);
     const apiMock = new MockAdapter(api);
@@ -42,7 +42,7 @@ describe('Reducer works correctly', () => {
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
         type: types.UPDATE_FAVORITES,
-        payload: adaptOffer(offersFromRequest[0])
+        payload: adaptOffers(offersFromRequest[0])
       });
     });
   });

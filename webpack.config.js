@@ -16,7 +16,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       minSize: 250000,
-      maxSize: 280000
+      maxSize: 300000
     }
   },
   devServer: {

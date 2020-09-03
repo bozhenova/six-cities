@@ -34,10 +34,11 @@ export const adaptOffer = offer => {
   };
 };
 
-export const adaptOffers = offers => offers.map(adaptOffer);
+export const adaptOffers = offers =>
+  Array.isArray(offers) ? offers.map(adaptOffer) : adaptOffer(offers);
 
-export const adaptComments = comments =>
-  comments.map(comment => ({
+export const adaptComment = comment => {
+  return {
     comment: comment[`comment`],
     date: comment[`date`],
     id: comment[`id`],
@@ -48,7 +49,11 @@ export const adaptComments = comments =>
       isPro: comment[`user`][`is_pro`],
       name: comment[`user`][`name`]
     }
-  }));
+  };
+};
+
+export const adaptComments = comments =>
+  Array.isArray(comments) ? comments.map(adaptComment) : adaptComment(comments);
 
 export const adaptLoginResponse = userData => ({
   avatarUrl: userData[`avatar_url`],
